@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediWise – Recommendations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f7f9fb;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    header h2 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    main.results {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    main h2 {
+      font-size: 2rem;
+      color: #0072ff;
+      margin-bottom: 0.5rem;
+    }
+
+    .disease-box {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #444;
+      background-color: #e3f2fd;
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0, 114, 255, 0.2);
+    }
+
+    .result-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    .box {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #e3e3e3;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .box strong {
+      display: block;
+      font-size: 1.2rem;
+      color: #00aaff;
+      margin-bottom: 0.5rem;
+    }
+
+    .box p, .box li {
+      line-height: 1.6;
+    }
+
+    .box ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    .box li {
+      margin-bottom: 0.4rem;
+    }
+
+    .btn {
+      display: block;
+      width: fit-content;
+      margin: 2rem auto 0;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #0072ff, #0057b8);
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f1f1f1;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>MediWise</h2>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+    </nav>
+  </header>
+
+  <main class="results">
+    <h2>Prediction Results</h2>
+    <div class="disease-box">
+      {{ predicted_disease }}
+    </div>
+
+    <div class="result-boxes">
+      <div class="box">
+        <strong>Description</strong>
+        <p>{{ dis_des }}</p>
+      </div>
+      <div class="box">
+        <strong>Precautions</strong>
+        <ul>
+          {% for p in my_precautions %}
+            <li>{{ p }}</li>
+          {% else %}
+            <li>No precautions found.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="box">
+  <strong>Medications</strong>
+  <ul>
+    {% for m in medications %}
+      <li>{{ m }}</li>
+    {% else %}
+      <li>No medications found.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="box">
+  <strong>Diet</strong>
+  <ul>
+    {% for d in my_diet %}
+      <li>{{ d }}</li>
+    {% else %}
+      <li>No diet found.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+      <div class="box">
+        <strong>Workout</strong>
+        <ul>
+          {% for w in workout %}
+            <li>{{ w }}</li>
+          {% else %}
+            <li>No workout found.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+    </div>
+    
+    <a class="btn" href="{{ url_for('index') }}">Try Again</a>
+  </main>
+
+  <footer>
+    © 2025 MediWise. All rights reserved.
+  </footer>
+</body>
+</html>
