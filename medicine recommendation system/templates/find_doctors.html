@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Doctors | Mediwise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="l-header">
+    <nav class="nav bd-container">
+      <a href="#" class="nav__logo">Mediwise</a>
+
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html#home" class="nav__link active-link">Home</a></li>
+          <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="index.html#services" class="nav__link">Services</a></li>
+         
+          <li class="nav__item"><a href="symptom_checker.html" class="nav__link">Check Symptoms</a></li>
+          <li class="nav__item">
+            <label for="language-select">Languages</label>
+            <select id="language-select" class="lang-select">
+              <option value="en">English</option>
+              <option value="hi">Hindi (हिन्दी)</option>
+              <option value="mr">Marathi (मराठी)</option>
+              <option value="ta">Tamil (தமிழ்)</option>
+              <option value="te">Telugu (తెలుగు)</option>
+              <option value="bn">Bengali (বাংলা)</option>
+              <option value="gu">Gujarati (ગુજરાતી)</option>
+              <option value="kn">Kannada (ಕನ್ನಡ)</option>
+              <option value="ml">Malayalam (മലയാളം)</option>
+              <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+              <option value="or">Odia (ଓଡ଼ିଆ)</option>
+              <option value="ur">Urdu (اردو)</option>
+              <option value="as">Assamese (অসমীয়া)</option>
+              <option value="bh">Bhojpuri (भोजपुरी)</option>
+              <option value="mni">Manipuri (মৈতৈলোন)</option>
+              <option value="ne">Nepali (नेपाली)</option>
+              <option value="sd">Sindhi (سنڌي)</option>
+              <option value="kok">Konkani (कोंकणी)</option>
+              <option value="ks">Kashmiri (كشميري)</option>
+              <option value="san">Sanskrit (संस्कृत)</option>
+            </select>
+          </li>
+          <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="bd-container section" id="find-doctors">
+    <h1 class="section-title">Find Nearby Doctors</h1>
+    <p class="section-subtitle">Enter your area or city to find nearby doctors.</p>
+
+    <form id="doctor-form" class="bd-grid" style="max-width:600px;margin:auto;">
+      
+      <input type="text" id="location" placeholder="e.g. Delhi, Bhopal" style="width:100%; padding:1rem; margin-top:0.5rem;" required />
+      <button type="submit" style="margin-top:1rem; padding:0.8rem; background:#069C54; color:white; border:none; cursor:pointer;">
+        Search Doctors
+      </button>
+    </form>
+
+    <div id="results" style="margin-top:2rem; text-align:center;"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="section">
+    <div class="bd-container" style="text-align:center;">
+      <p>&copy; 2025 Mediwise. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Toggle menu
+    const toggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (toggle && navMenu) {
+      toggle.addEventListener('click', () => {
+        navMenu.classList.toggle('show-menu');
+      });
+    }
+
+    // Find Doctors mock response
+    document.getElementById('doctor-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const location = document.getElementById('location').value.trim();
+      const results = document.getElementById('results');
+
+      if (location) {
+        results.innerHTML = `<p>Searching for doctors near <strong>${location}</strong>...</p>`;
+
+        setTimeout(() => {
+          results.innerHTML = `
+            <div style="text-align:left; max-width:600px; margin:auto; margin-top:1rem;">
+              <h3>Doctors near ${location}:</h3>
+              <ul style="line-height: 1.8;">
+                <li><strong>Dr. Aditi Verma</strong> - General Physician - +91 9876543210</li>
+                <li><strong>Dr. Arjun Mehra</strong> - Cardiologist - +91 9123456780</li>
+                <li><strong>Dr. Sneha Kapoor</strong> - Pediatrician - +91 9988776655</li>
+              </ul>
+              <p style="margin-top:1rem;"><em>Note: This is a simulated result. For actual appointments, contact a verified provider.</em></p>
+            </div>
+          `;
+        }, 1500);
+      } else {
+        results.innerHTML = `<p>Please enter a location to continue.</p>`;
+      }
+    });
+   
+  </script>
+</body>
+</html>
