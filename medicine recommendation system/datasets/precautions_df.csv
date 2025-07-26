@@ -35,8 +35,128 @@
 33,Hepatitis E,stop alcohol consumption,rest,consult doctor,medication
 34,Dengue,drink papaya leaf juice,avoid fatty spicy food,keep mosquitos away,keep hydrated
 35,Hepatitis D,consult doctor,medication,eat healthy,follow up
-36,Heart attack,call ambulance,chew or swallow asprin,keep calm,
+36,Heart attack,call ambulance,chew or swallow asprin,keep calm,consult doctor
 37,Pneumonia,consult doctor,medication,rest,follow up
 38,Arthritis,exercise,use hot and cold therapy,try acupuncture,massage
 39,Gastroenteritis,stop eating solid food for while,try taking small sips of water,rest,ease back into eating
 40,Tuberculosis,cover mouth,consult doctor,medication,rest
+41,Cold,drink warm fluids,rest adequately,avoid cold exposure,use nasal sprays
+42,Flu,stay hydrated,take antiviral meds,rest,avoid contact with others
+43,Typhus,consult doctor,maintain hygiene,use insect repellents,take prescribed antibiotics
+44,Swine flu,get vaccinated,wear masks,avoid crowds,rest
+45,Sinusitis,use steam inhalation,drink fluids,apply warm compress,consult doctor
+46,Glaucoma,regular eye checkups,use prescribed eye drops,avoid straining eyes,limit caffeine
+47,Conjunctivitis,avoid touching eyes,clean eyes with sterile water,avoid sharing towels,consult doctor
+48,Blepharitis,clean eyelids regularly,avoid eye makeup,use warm compress,consult doctor
+49,Cataract,get regular eye exams,wear sunglasses,manage diabetes,plan for surgery if needed
+50,Macular Degeneration,eat leafy greens,regular eye checkups,avoid smoking,manage blood pressure
+51,Retinal Detachment,seek emergency care,avoid heavy activities,wear eye protection,follow-up regularly
+52,Ear Infection,keep ears dry,avoid inserting objects,consult doctor,take prescribed antibiotics
+53,Otosclerosis,consult ENT specialist,avoid loud noises,consider surgery,hearing tests
+54,Tonsillitis,gargle with warm salt water,stay hydrated,avoid cold food,consult doctor
+55,Pharyngitis,drink warm fluids,avoid irritants,take throat lozenges,rest voice
+56,Laryngitis,avoid whispering,stay hydrated,use humidifier,consult doctor
+57,Bronchitis,rest,drink fluids,avoid smoke,take cough suppressants if needed
+58,Emphysema,quit smoking,practice breathing exercises,avoid air pollutants,consult doctor
+59,COPD,avoid smoking,exercise regularly,maintain clean air,consult pulmonologist
+60,Pulmonary Fibrosis,get vaccinated,avoid exposure to dust/pollutants,consult doctor,exercise moderately
+61,Anxiety,practice relaxation techniques,avoid caffeine,consult therapist,medication if needed
+62,Depression,seek therapy,stay active,maintain a routine,consult psychiatrist
+63,Insomnia,establish a sleep routine,avoid screens before bed,create a comfortable sleep environment,consult doctor
+64,Epilepsy,take prescribed medications,avoid triggers,wear a medical alert bracelet,consult doctor
+65,Parkinson's disease,stay active,consult neurologist,medication management,consider support groups
+66,Alzheimer's disease,engage in mental exercises,maintain a routine,stay,consult neurologist
+67,PCOD,maintain a healthy weight,exercise regularly,consult gynecologist,consult doctor
+68,Endometriosis,manage stress,consult gynecologist,consider hormonal treatments,maintain a healthy diet
+69,Menstrual cramps,apply heat to lower abdomen,rest,over-the-counter pain relievers,consult doctor
+70,Acidity,avoid trigger foods,maintain a healthy weight,avoid lying down after meals,consult doctor
+71,Constipation,drink plenty of water,eat high-fiber foods,exercise regularly,  consult doctor
+72,Diarrhea,stay hydrated,avoid dairy products,consume bland foods,consult doctor
+73,Back Pain,maintain good posture,exercise regularly,apply heat or cold packs,consult doctor
+74,Toothache,rinse with warm salt water,avoid very hot or cold foods,consult dentist,over-the-counter pain relievers
+75,Eye infection,avoid touching eyes,clean with sterile water,avoid sharing towels,consult doctor
+76,Ear infection,keep ears dry,avoid inserting objects,consult doctor,take prescribed antibiotics
+77,Sinusitis,drink plenty of fluids,use saline nasal spray,apply warm compresses,consult doctor
+78,Scabies,apply prescribed cream,avoid close contact with others,wash clothes and bedding, consult doctor
+79,Cold,rest,drink warm fluids,avoid cold exposure,use nasal sprays
+80,Cough,stay hydrated,use cough suppressants if needed,consult doctor,avoid irritants
+81,Anxiety,practice relaxation techniques,avoid caffeine,consult therapist,medication if needed
+82,Depression,seek therapy,stay active,maintain a routine,consult psychiatrist
+83,Insomnia,establish a sleep routine,avoid screens before bed,create a comfortable sleep environment,consult doctor
+84,Epilepsy,take prescribed medications,avoid triggers,wear a medical alert bracelet,consult doctor
+85,Parkinson's disease,stay active,consult neurologist,medication management,consider support groups
+86,Alzheimer's disease,engage in mental exercises,maintain a routine,stay socially active,consult neurologist
+87,Typhus,maintain personal hygiene,avoid contact with lice or fleas,consult doctor,take prescribed antibiotics
+88,Urinary incontinence,do pelvic floor exercises,avoid caffeine and alcohol,maintain healthy weight,consult doctor
+89,Typhoid fever,drink boiled water,eat home-cooked meals,avoid raw foods,complete antibiotic course
+90,Dyspepsia,avoid fatty spicy food,eat slowly,limit alcohol intake,manage stress
+91,Nasal polyp,use nasal corticosteroid sprays,avoid allergens,steam inhalation,consult ENT specialist
+92,Acute bronchitis,rest well,stay hydrated,avoid smoke and dust,consult doctor
+93,Cholera,drink ORS solution,eat hygienic food,maintain hand hygiene,consult doctor
+94,Influenza,get vaccinated annually,rest and stay hydrated,avoid contact with infected people,consult doctor
+95,Scabies,avoid skin-to-skin contact,wash clothes and bedding in hot water,use prescribed lotion,maintain hygiene
+96,Conjunctivitis,avoid touching eyes,don’t share towels or makeup,use eye drops,consult ophthalmologist
+97,Tonsillitis,gargle with warm salt water,avoid cold drinks and food,take prescribed antibiotics,consult doctor
+98,Measles,isolate the patient,keep hydrated,take vitamin A supplements,consult doctor
+99,Mumps,rest and isolate from others,apply cold compress on swelling,drink plenty of fluids,consult doctor
+100,Rubella,isolate the patient,rest and stay hydrated,get vaccinated (MMR),consult doctor
+101,Tetanus,clean wounds immediately,get tetanus shots,avoid rusty items,consult doctor
+102,Rabies,wash wound with soap and water,get anti-rabies vaccination,avoid contact with stray animals,consult doctor
+103,Leprosy,avoid close contact,maintain personal hygiene,complete antibiotic course,regular follow-ups
+104,Plague,avoid contact with rodents and fleas,use insect repellent,maintain hygiene,consult doctor
+105,Filariasis,avoid mosquito bites,sleep under nets,maintain hygiene,consult doctor
+106,Anthrax,avoid contact with infected animals,wear protective clothing,seek immediate medical help,follow antibiotic treatment
+107,Chikungunya,rest and stay hydrated,avoid mosquito bites,apply cold packs for joint pain,consult doctor
+108,Zika virus,avoid mosquito bites,rest and stay hydrated,consult doctor,monitor symptoms
+109,Yellow fever,get vaccinated,avoid mosquito bites,stay in well-screened areas,consult doctor
+110,Dengue fever,rest and stay hydrated,avoid mosquito bites,monitor for severe symptoms, consult doctor
+111,Leptospirosis,avoid contact with contaminated water,wear protective clothing,maintain hygiene,consult doctor
+112,Chagas disease,avoid contact with triatomine bugs,maintain hygiene,consult doctor,follow treatment plan
+113,Schistosomiasis,avoid swimming in contaminated water,wear protective clothing,maintain hygiene,consult doctor
+114,Malaria,avoid mosquito bites,use insect repellent,consult doctor for antimalarial medication,monitor symptoms
+115,Onchocerciasis,avoid contact with blackflies,use insect repellent,maintain hygiene,consult doctor
+116,Trypanosomiasis (Sleeping Sickness),avoid contact with tsetse flies,use protective clothing,maintain hygiene,consult doctor
+117,Leishmaniasis,avoid contact with sandflies,use insect repellent,maintain hygiene,consult doctor
+118,Chronic Fatigue Syndrome,rest and pace activities,manage stress,consult doctor for treatment options,consider therapy
+119,Post-Traumatic Stress Disorder (PTSD),seek therapy,practice relaxation techniques,  avoid triggers,consult psychiatrist
+120,Obsessive-Compulsive Disorder (OCD),seek therapy,practice mindfulness,avoid triggers,consult psychiatrist
+121,Social Anxiety Disorder,practice relaxation techniques,exposure therapy,avoid caffeine,consult therapist
+122,Typhus,maintain hygiene,avoid contact with lice or fleas,consult doctor,take antibiotics
+123,Yellow Fever,avoid mosquito bites,get vaccinated,rest and hydrate,consult doctor
+124,Zika Virus,avoid mosquito bites,rest and fluids,avoid pregnancy during infection,consult doctor
+125,Chikungunya,avoid mosquito bites,take rest and fluids,use paracetamol for pain,consult doctor
+126,Swine Flu,wear mask,maintain distance,avoid crowded areas,consult doctor
+127,H1N1 Flu,wear mask,avoid close contact,rest and hydrate,consult doctor
+128,Ebola,avoid contact with infected individuals,practice strict hygiene,wear protective gear,seek emergency care
+129,Marburg Virus,avoid contact with bodily fluids,isolate patient,wear PPE,seek urgent medical care
+130,Lassa Fever,store food safely,avoid rodents,wear gloves while cleaning,consult doctor
+131,Nipah Virus,avoid eating raw date palm sap,avoid contact with infected bats or pigs,isolate patients,consult doctor
+132,Crimean-Congo Hemorrhagic Fever,avoid contact with ticks and infected animals,wear protective clothing,maintain hygiene,consult doctor
+133,Leptospirosis,avoid contact with contaminated water,wear protective clothing,maintain hygiene,consult doctor
+134,Chagas Disease,avoid contact with triatomine bugs,wear protective clothing,maintain hygiene,consult doctor
+135,Schistosomiasis,avoid swimming in contaminated water,wear protective clothing,maintain hygiene,consult doctor
+136,Filariasis,avoid mosquito bites,sleep under nets,maintain hygiene,consult   doctor
+137,Onchocerciasis,avoid contact with blackflies,use insect repellent,maintain hygiene,consult doctor
+138,Syphilis,practice safe sex,get tested regularly,avoid multiple partners,complete antibiotic treatment
+139,Gonorrhea,practice safe sex,get tested regularly,inform sexual partners,complete full antibiotic course
+140,Trichomoniasis,avoid unprotected sex,get regular screenings,avoid sharing towels or undergarments,consult doctor
+141,Bacterial Vaginosis,maintain vaginal hygiene,avoid scented soaps or sprays,avoid douching,consult doctor
+142,Candidiasis,keep affected area dry and clean,avoid tight-fitting clothing,reduce sugar intake,consult doctor
+143,Autism Spectrum Disorder,follow structured routines,provide behavioral therapy,support with communication aids,consult specialist
+144,Bipolar Disorder,take medications regularly,follow a sleep schedule,avoid substance abuse,consult psychiatrist
+145,Schizophrenia,take prescribed medications,attend therapy sessions,avoid stress and alcohol,consult psychiatrist
+146,ADHD,follow structured routines,limit distractions,attend behavioral therapy,consult specialist
+147,Anorexia Nervosa,seek psychological counseling,monitor eating habits,avoid isolation,consult dietitian and therapist
+148,Bulimia Nervosa,develop healthy eating habits,avoid self-induced vomiting,seek mental health support,consult doctor
+149,Gallstones,avoid fatty foods,maintain healthy weight,eat regular meals,consult gastroenterologist
+150,Kidney Stones,drink plenty of fluids,limit salt intake,avoid oxalate-rich foods,consult urologist
+151,Cystitis,drink more water,maintain genital hygiene,urinate frequently,consult doctor
+152,Hemophilia,avoid contact sports,inform doctors before surgeries,use safety gear,regular check-ups
+153,Sickle Cell Anemia,stay hydrated,avoid extreme temperatures,manage pain with medication,regular doctor visits
+154,Thalassemia,get regular blood transfusions,avoid iron-rich foods if iron overload occurs,take folic acid,consult hematologist
+155,Pneumothorax,avoid high altitudes or flying after recent collapse,do not smoke,seek emergency care if symptoms worsen,regular follow-up
+156,Appendicitis,avoid self-medication for pain,seek immediate care for abdominal pain,avoid heavy meals if in pain,consult surgeon
+157,Pancreatitis,avoid alcohol,consume low-fat meals,stay hydrated,consult doctor
+158,Celiac Disease,follow gluten-free diet,read food labels,avoid cross-contamination,consult dietitian
+159,Crohn’s Disease,eat low-fiber foods during flare-up,avoid smoking,manage stress,consult gastroenterologist
+160,Irritable Bowel Syndrome (IBS),eat smaller meals,avoid trigger foods,manage stress,consult doctor
