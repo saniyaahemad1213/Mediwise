@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+       <title>Find Doctors | Mediwise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../static/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <!-- Lottie Player -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+        <link rel="stylesheet" href="../static/styles.css">
+
+        <title>Mediwise - Your Health Partner</title>
+   
+    <body>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+    }
+    .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 2rem;
+      color: #069C54;
+    }
+    .section-subtitle {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+    .bd-grid textarea {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .bd-grid button {
+      background-color: #069C54;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    #result {
+      margin-top: 2rem;
+    }
+    .disease-box {
+      font-size: 1.5rem;
+      font-weight: 600;
+      background-color: #e3f2fd;
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 1rem auto;
+      max-width: 600px;
+    }
+    .result-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: auto;
+      margin-top: 2rem;
+    }
+    .box {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .box strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #069C54;
+    }
+    .box ul {
+      padding-left: 1.2rem;
+    }
+  </style>
+  
+        <!--========== SCROLL TOP ==========-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon'></i>
+        </a>
+
+        <!--========== HEADER ==========-->
+          <header class="l-header" id="header" style="background: #f8fbfd;">
+    <nav class="nav bd-container" style="background: #f8fbfd; display: flex; justify-content: space-between; align-items: center;">
+      <a href="#" class="nav__logo" style="display: flex; align-items: center; font-size: 1.2rem; font-weight: 500;">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align: middle; margin-right:8px;">
+          <circle cx="16" cy="16" r="16" fill="#4F8FF3" />
+          <path d="M16 8v16M8 16h16" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        Mediwise
+      </a>
+      <div class="nav__menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="/#home" class="nav__link active-link">Home</a></li>
+          <li class="nav__item"><a href="/#about" class="nav__link">About</a></li>
+          <li class="nav__item"><a href="/find_doctors" class="nav__link">Find Doctors</a></li>
+          <li class="nav__item"><a href="/#contact" class="nav__link">Contact</a></li>
+         <li class="nav__item">
+  <!-- Hidden Google Translate Widget -->
+<script defer src="../static/main.js"></script>
+
+<select id="language-select" class="lang-select">
+  <option value="">Select Language</option>
+  <option value="en">English</option>
+  <option value="hi">Hindi (हिन्दी)</option>
+  <option value="mr">Marathi (मराठी)</option>
+  <option value="ta">Tamil (தமிழ்)</option>
+  <option value="te">Telugu (తెలుగు)</option>
+  <option value="bn">Bengali (বাংলা)</option>
+  <option value="gu">Gujarati (ગુજરાતી)</option>
+  <option value="kn">Kannada (ಕನ್ನಡ)</option>
+  <option value="ml">Malayalam (മലയാളം)</option>
+  <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+  <option value="or">Odia (ଓଡ଼ିଆ)</option>
+  <option value="ur">Urdu (اردو)</option>
+  <option value="as">Assamese (অসমীয়া)</option>
+  <option value="bh">Bhojpuri (भोजपुरी)</option>
+  <option value="mni">Manipuri (মৈতৈলোন)</option>
+  <option value="ne">Nepali (नेपाली)</option>
+  <option value="sd">Sindhi (سنڌي)</option>
+  <option value="kok">Konkani (कोंकणी)</option>
+  <option value="ks">Kashmiri (كٲشُر)</option>
+  <option value="sa">Sanskrit (संस्कृतम्)</option>
+</select>
+
+</li>
+
+
+    </nav>
+  </header>
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <!-- Main Content -->
+  <main class="bd-container section" id="checker">
+    <h1 class="section-title">Symptom Checker</h1>
+    <p class="section-subtitle">Describe your symptoms and get intelligent suggestions.</p>
+
+    <form id="symptom-form" class="bd-grid" style="max-width:600px;margin:auto;">
+      <label for="symptoms">Enter your symptoms:</label>
+      <textarea id="symptoms" rows="5"></textarea>
+      <button type="submit">Check Symptoms</button>
+    </form>
+
+    <div id="result" style="display:none; text-align:center;">
+      <h2 style="font-size: 2rem; color: #0072ff;">Prediction Results</h2>
+      <div class="disease-box">
+        <span id="predicted-disease">Flu</span>
+      </div>
+      <div class="result-boxes">
+        <div class="box">
+          <strong>Description</strong>
+          <p id="disease-description">A viral infection that attacks your respiratory system.</p>
+        </div>
+        <div class="box">
+          <strong>Precautions</strong>
+          <ul id="precautions-list"></ul>
+        </div>
+        <div class="box">
+          <strong>Medications</strong>
+          <ul id="medications-list"></ul>
+        </div>
+        <div class="box">
+          <strong>Diet</strong>
+          <ul id="diet-list"></ul>
+        </div>
+        <div class="box">
+          <strong>Workout</strong>
+          <ul id="workout-list"></ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="section">
+    <div class="bd-container" style="text-align:center;">
+      <p>&copy; 2025 Mediwise. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    document.getElementById('symptom-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const symptoms = document.getElementById('symptoms').value.trim();
+      const resultSection = document.getElementById('result');
+
+      if (symptoms) {
+        // Replace this with your AJAX call to Flask if needed
+        const data = {
+          predicted_disease: "Common Cold",
+          description: "A viral infection affecting nose and throat.",
+          precautions: ["Drink plenty of fluids", "Rest", "Use humidifier", "Avoid cold foods"],
+          medications: ["Paracetamol", "Cough syrup", "Antihistamines"],
+          diet: ["Warm soups", "Ginger tea", "Vitamin C rich foods"],
+          workout: ["Light stretching", "Breathing exercises"]
+        };
+
+        document.getElementById('predicted-disease').textContent = data.predicted_disease;
+        document.getElementById('disease-description').textContent = data.description;
+
+        const setList = (id, items) => {
+          const ul = document.getElementById(id);
+          ul.innerHTML = "";
+          items.forEach(i => {
+            const li = document.createElement("li");
+            li.textContent = i;
+            ul.appendChild(li);
+          });
+        };
+
+        setList("precautions-list", data.precautions);
+        setList("medications-list", data.medications);
+        setList("diet-list", data.diet);
+        setList("workout-list", data.workout);
+
+        resultSection.style.display = "block";
+        resultSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        alert("Please enter symptoms first.");
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const userSelect = document.getElementById("language-select");
+      userSelect.addEventListener("change", () => {
+        const selectedLang = userSelect.value;
+        const googleCombo = document.querySelector(".goog-te-combo");
+        if (!googleCombo) {
+          alert("Translator not loaded yet. Please wait a moment and try again.");
+          return;
+        }
+        googleCombo.value = selectedLang;
+        googleCombo.dispatchEvent(new Event("change"));

@@ -14,10 +14,9 @@
   <style>
     /* Global Styles */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-body, html {
+    body, html {
   height: 100%;
 }
-
 body {
   min-height: 100vh;
   min-width: 100vw;
@@ -25,12 +24,14 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Poppins', sans-serif;
-  background-color: #f0f4f8;
-  color: #333;
-  line-height: 1.5;
-  transition: background 0.3s, color 0.3s;
 }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      line-height: 1.5;
+      transition: background 0.3s, color 0.3s;
+    }
 
     /* Header */
     header {
@@ -661,6 +662,7 @@ body.dark-mode .full-width-section {
     <a href="#contact">Contact</a>
     <button id="theme-toggle" class="toggle-btn" type="button">🌙</button>
 <select id="language-select" class="lang-select">
+  <option value="">Select Language</option>
   <option value="en">English</option>
   <option value="hi">Hindi (हिन्दी)</option>
   <option value="mr">Marathi (मराठी)</option>
@@ -679,99 +681,143 @@ body.dark-mode .full-width-section {
   <option value="ne">Nepali (नेपाली)</option>
   <option value="sd">Sindhi (سنڌي)</option>
   <option value="kok">Konkani (कोंकणी)</option>
-  <option value="ks">Kashmiri (كشميري)</option>
-  <option value="san">Sanskrit (संस्कृत)</option>
+  <option value="ks">Kashmiri (كٲشُر)</option>
+  <option value="sa">Sanskrit (संस्कृतम्)</option>
 </select>
 
-  </nav>
-</header>
+</li>
+<li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
 
-<!-- Home Section -->
-<div id="home" class="hero-flex">
-  <div class="hero-text">
-    <h1 class="hero-heading">Welcome to <span class="highlight">MediWise</span></h1>
-    <p class="hero-description">
-      MediWise is your intelligent healthcare companion powered by AI.<br>
-      Instantly check symptoms, find nearby doctors, and receive wellness tips tailored to you.<br>
-      Accessible, smart, and reliable – your health, our priority.
-    </p>
-  </div>
-  <div class="hero-lottie">
-    <lottie-player
-      src="../static/DOCTOR.json"
-      background="transparent"
-      speed="1"
-      style="width: 340px; height: 340px; min-width: 220px;"
-      loop
-      autoplay
-    ></lottie-player>
-  </div>
-</div>
+    </nav>
+  </header>
 
-<!-- Recommendations Section (still part of Home visually, or you can move it elsewhere) -->
-<div class="right-fade" style="margin-bottom: 40px;">
-  <h2>Recommendations</h2>
-  <div class="result-boxes">
-    <div class="box disease" data-step="1">Disease Prediction</div>
-    <div class="box description" data-step="2">Description</div>
-    <div class="box precaution" data-step="3">Precautions</div>
-    <div class="box medications" data-step="4">Medications</div>
-    <div class="box workouts" data-step="5">Workouts</div>
-    <div class="box diets" data-step="6">Diet Plan</div>
-  </div>
-</div>
+       <main class="l-main">
+        <section class="home" id="home">
+      <div class="home__container bd-container bd-grid" style="display: flex; align-items: center; justify-content: space-between;">
+        <div class="home__data" style="flex: 1;">
+          <h2 class="home__title">Welcome To Mediwise</h2>
+          <h2 class="home__subtitle">Your AI Assisted Healthcare Partner <br> </h2>
+          <a href="#services" class="button">Explore Services</a>
+        </div>
+        <div class="home__lottie" style="flex: 1; display: flex; align-items: center; justify-content: flex-end;">
+         <lottie-player
+  src="../static/DOCTOR.json"
+  background="transparent"
+  speed="1"
+  style="width: 400px; height: 400px;"
+  loop
+  autoplay>
+</lottie-player>
 
-<!-- Check Symptoms Section -->
-<section id="check-symptoms" class="full-width-section symptom-section">
-  <h1>Check Your Symptoms</h1>
-  <form id="symptomInput" method="POST" action="/predict">
-    <input type="text" id="symptomInput" name="symptoms" placeholder="Enter your symptom..." required />
-    <div class="example-hint">
-      <em>Example: vomiting, shivering, skin_rash</em>
+        </div>
+      </div>
+   
+    </section>
+</main>
+            
+<!--========== ABOUT ==========-->
+<section class="about section bd-container" id="about">
+  <div class="about__container bd-grid">
+    
+    <!-- Lottie Animation on the Left -->
+    <div class="home__lottie" style="display: flex; align-items: center; justify-content: flex-start;">
+      <lottie-player
+        src="../static/Patient lottie.json"
+        background="transparent"
+        speed="1"
+        style="width: 400px; height: 400px;"
+        loop
+        autoplay>
+      </lottie-player>
     </div>
-    <select id="durationSelect" name="duration" required>
-      <option value="">Select duration</option>
-      <option value="1 Day">1 Day</option>
-      <option value="3 Days">3 Days</option>
-      <option value="1 Week">1 Week</option> 
-      <option value="2 Weeks">2 Weeks</option> 
-      <option value="1 Month">1 Month</option>
-    </select>
-    <button type="submit" class="btn doctor-btn">Get Recommendation</button>
-  </form>
-  <div id="recommendationResult"></div>
-</section>
 
-<section id="find-doctor" class="full-width-section doctor-section">
-  <h3>Find Nearby Doctors</h3>
-  <input type="text" id="locationInput" placeholder="Enter location">
-  <button type="button" onclick="findDoctors()">Find Doctors</button>
-  <p style="margin-top: 10px; font-style: italic;">🔍 Zoom in on the map to find nearby doctors.</p>
-  <ul id="doctorList"></ul>
-  <div id="map-container" style="display:none; height: 500px; margin-top: 20px;">
-    <div id="map" style="height: 100%; width: 100%; min-height: 400px;"></div>
+    <!-- About Text on the Right -->
+    <div class="about__data">
+      <span class="section-subtitle about__initial">About Mediwise</span>
+      <h2 class="section-title about__initial">Empowering Your Health</h2>
+      <p class="about__description">
+        Mediwise provides top-notch healthcare services, expert consultations, and personalized care for you and your family.
+      </p>
+      <a href="#contact" class="button">Contact Us</a>
+    </div>
+
   </div>
 </section>
 
 
-<!-- Contact Section -->
-<section class="get-in-touch" id="contact">
-  <div class="touch-container">
-    <h2>Get in Touch</h2>
-    <form class="feedback-form" action="https://formspree.io/f/xvgrpjkb" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-      <button type="submit" class="send-button">Send Message 🚀</button>
-    </form>
+            <!--========== SERVICES ==========-->
+           <section class="services section bd-container" id="services">
+  <span class="section-subtitle">Our Services</span>
+  <h2 class="section-title">What We Offer</h2>
+  <div class="services__container">
+    <a href="/symptom_checker" class="service-card">
+      <i class='bx bx-heart'></i>
+      <h3>AI Symptom Checker</h3>
+      <p>Instantly analyze symptoms & get smart advice.</p>
+    </a>
+    <a href="/find_doctors" class="service-card">
+      <i class='bx bx-user-md'></i>
+      <h3>Find Nearby Doctors</h3>
+      <p>Locate trusted healthcare professionals near you.</p>
+    </a>
+    <a class="service-card">
+      <i class='bx bx-capsule'></i>
+      <h3>Multi Language Support</h3>
+      <p>Available in 18+ Indian Languages.</p>
+    </a>
   </div>
 </section>
+  </main>
 
+            <!--========== CONTACT US ==========-->
+            <section class="contact section bd-container" id="contact">
+                <div class="contact__container bd-grid">
+                    <div class="contact__data">
+                        <span class="section-subtitle contact__initial">Let's talk</span>
+                        <h2 class="section-title contact__initial">Contact Mediwise</h2>
+                        <p class="contact__description">
+                            For appointments, support, or feedback, reach out to us. We are available 24/7 to assist you.
+                        </p>
+                    </div>
+                    <div class="contact__button">
+                        <a href="mailto:info@mediwise.com" class="button">Contact us now</a>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-<!-- Footer -->
-<footer style="background-color: #1a1a1a; color: white; text-align: center; padding: 20px 0; font-size: 14px;">
-  &copy; 2025 MediWise. All rights reserved.
-</footer>
+        <!--========== FOOTER ==========-->
+        <footer class="footer section bd-container">
+            <div class="footer__container bd-grid">
+                <div class="footer__content">
+                    <a href="#" class="footer__logo">Mediwise</a>
+                    <span class="footer__description">Healthcare</span>
+                    <div>
+                        <a href="#" class="footer__social"><i class='bx bxl-facebook'></i></a>
+                        <a href="#" class="footer__social"><i class='bx bxl-instagram'></i></a>
+                        <a href="#" class="footer__social"><i class='bx bxl-twitter'></i></a>
+                    </div>
+                </div>
+                <div class="footer__content">
+                    <h3 class="footer__title">Services</h3>
+                    <ul>
+                        <li><a href="/symptom_checker" class="footer__link">AI Symptom Checker</a></li>
+                        <li><a href="/find_doctors" class="footer__link">Find Doctors</a></li>
+                        <li><a href="#" class="footer__link">Multi Language Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer__content">
+                    <h3 class="footer__title">Information</h3>
+                    <ul>
+                        <li><a href="#" class="footer__link">About</a></li>
+                        <li><a href="#" class="footer__link">Contact</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+            <p class="footer__copy">&#169; 2025 Mediwise. All rights reserved</p>
+        </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -797,7 +843,530 @@ document.addEventListener('DOMContentLoaded', function() {
     setTheme(body.classList.contains('dark-mode') ? 'light' : 'dark');
   });
 
-
+  // --- Multi-language support ---
+  const translations = {
+    en: {
+      welcome: "Welcome to ",
+      mediwise: "MediWise",
+      hero_description: "MediWise is your intelligent healthcare companion powered by AI.\nInstantly check symptoms, find nearby doctors, and receive wellness tips tailored to you.\nAccessible, smart, and reliable – your health, our priority.",
+      doctor_image_alt: "Doctor Image",
+      disease_prediction: "Disease Prediction",
+      description: "Description",
+      precautions: "Precautions",
+      medications: "Medications",
+      workouts: "Workouts",
+      diet_plan: "Diet Plan",
+      check_symptoms: "Check Your Symptoms",
+      enter_symptom_placeholder: "Enter your symptom...",
+      example_symptoms: "Example: vomiting, cold, rashes",
+      select_duration: "Select duration",
+      get_recommendation: "Get Recommendation",
+      find_nearby_doctors: "Find Nearby Doctors",
+      enter_location: "Enter location",
+      find_doctors: "Find Doctors",
+      contact: "Contact",
+      contact_description: "We’d love to hear from you. Reach out for queries, partnerships, or support.",
+      email: "Email",
+      phone: "Phone",
+      follow_us: "Follow Us",
+      recommendations: "Recommendations"
+    },
+    hi: {
+      welcome: "स्वागत है ",
+      mediwise: "MediWise",
+      hero_description: "MediWise आपका बुद्धिमान स्वास्थ्य साथी है, जो AI द्वारा संचालित है।\nतुरंत लक्षण जांचें, पास के डॉक्टर खोजें, और आपके लिए उपयुक्त स्वास्थ्य सुझाव पाएं।\nसुलभ, स्मार्ट और विश्वसनीय – आपका स्वास्थ्य, हमारी प्राथमिकता।",
+      doctor_image_alt: "डॉक्टर छवि",
+      disease_prediction: "रोग की पहचान",
+      description: "विवरण",
+      precautions: "सावधानियाँ",
+      medications: "दवाइयाँ",
+      workouts: "व्यायाम",
+      diet_plan: "आहार योजना",
+      check_symptoms: "अपने लक्षण जांचें",
+      enter_symptom_placeholder: "अपना लक्षण दर्ज करें...",
+      example_symptoms: "उदाहरण: उल्टी, ठंड लगना, चकत्ते",
+      select_duration: "अवधि चुनें",
+      get_recommendation: "सिफारिश प्राप्त करें",
+      find_nearby_doctors: "पास के डॉक्टर खोजें",
+      enter_location: "स्थान दर्ज करें",
+      find_doctors: "डॉक्टर खोजें",
+      contact: "संपर्क करें",
+      contact_description: "हम आपसे सुनना चाहेंगे। प्रश्नों, साझेदारी, या समर्थन के लिए संपर्क करें।",
+      email: "ईमेल",
+      phone: "फ़ोन",
+      follow_us: "हमें फॉलो करें",
+      recommendations: "सिफारिशें"
+    },
+    mr: {
+      welcome: "स्वागत आहे ",
+      mediwise: "MediWise",
+      hero_description: "MediWise हा तुमचा बुद्धिमान आरोग्य साथी आहे, AI द्वारे समर्थित.\nताबडतोब लक्षणे तपासा, जवळचे डॉक्टर शोधा, आणि तुमच्यासाठी आरोग्य टिप्स मिळवा.\nसुलभ, स्मार्ट आणि विश्वासार्ह – तुमचे आरोग्य, आमची प्राथमिकता.",
+      doctor_image_alt: "डॉक्टर प्रतिमा",
+      disease_prediction: "रोगाचे निदान",
+      description: "वर्णन",
+      precautions: "पूर्वसूचना",
+      medications: "औषधे",
+      workouts: "व्यायाम",
+      diet_plan: "आहार योजना",
+      check_symptoms: "तुमचे लक्षण तपासा",
+      enter_symptom_placeholder: "तुमचे लक्षण प्रविष्ट करा...",
+      example_symptoms: "उदाहरण: उलटी, थंडी, पुरळ",
+      select_duration: "कालावधी निवडा",
+      get_recommendation: "शिफारस मिळवा",
+      find_nearby_doctors: "जवळचे डॉक्टर शोधा",
+      enter_location: "स्थान प्रविष्ट करा",
+      find_doctors: "डॉक्टर शोधा",
+      contact: "संपर्क",
+      contact_description: "आम्हाला तुमच्याकडून ऐकायला आवडेल. प्रश्न, भागीदारी किंवा समर्थनासाठी संपर्क करा.",
+      email: "ईमेल",
+      phone: "फोन",
+      follow_us: "आमला फॉलो करा",
+      recommendations: "शिफारसी"
+    },
+    ta: {
+      welcome: "வரவேற்கிறது ",
+      mediwise: "MediWise",
+      hero_description: "MediWise உங்கள் புத்திசாலி சுகாதார துணை, AI மூலம் இயக்கப்படுகிறது.\nஉடனடியாக அறிகுறிகளை சரிபார்க்கவும், அருகிலுள்ள மருத்துவரை கண்டறியவும், உங்களுக்கு ஏற்ற நல ஆலோசனைகளைப் பெறவும்.\nஎளிதாக, புத்திசாலியாக, நம்பகமாக – உங்கள் ஆரோக்கியம், எங்கள் முன்னுரிமை.",
+      doctor_image_alt: "மருத்துவர் படம்",
+      disease_prediction: "நோய் முன்னறிவு",
+      description: "விவரம்",
+      precautions: "முன்னெச்சரிக்கைகள்",
+      medications: "மருந்துகள்",
+      workouts: "உடற்பயிற்சிகள்",
+      diet_plan: "உணவு திட்டம்",
+      check_symptoms: "உங்கள் அறிகுறிகளை சரிபார்க்கவும்",
+      enter_symptom_placeholder: "உங்கள் அறிகுறியை உள்ளிடவும்...",
+      example_symptoms: "உதாரணம்: வாந்தி, குளிர், தோலில் புண்கள்",
+      select_duration: "கால அளவைத் தேர்ந்தெடுக்கவும்",
+      get_recommendation: "பரிந்துரை பெறவும்",
+      find_nearby_doctors: "அருகிலுள்ள மருத்துவரை கண்டறியவும்",
+      enter_location: "இருப்பிடத்தை உள்ளிடவும்",
+      find_doctors: "மருத்துவரை கண்டறியவும்",
+      contact: "தொடர்பு கொள்ளவும்",
+      contact_description: "உங்களிடமிருந்து கேட்க விரும்புகிறோம். கேள்விகள், கூட்டாண்மை அல்லது ஆதரவுக்காக தொடர்பு கொள்ளவும்.",
+      email: "மின்னஞ்சல்",
+      phone: "தொலைபேசி",
+      follow_us: "எங்களை பின்தொடரவும்",
+      recommendations: "பரிந்துரைகள்"
+    },
+    te: {
+      welcome: "స్వాగతం ",
+      mediwise: "MediWise",
+      hero_description: "MediWise మీ తెలివైన ఆరోగ్య సహాయకుడు, AI ద్వారా నడపబడుతుంది.\nతక్షణమే లక్షణాలను తనిఖీ చేయండి, సమీప వైద్యులను కనుగొనండి, మరియు మీకు అనుకూలమైన ఆరోగ్య సూచనలను పొందండి.\nసులభమైనది, తెలివైనది, విశ్వసనీయమైనది – మీ ఆరోగ్యం, మా ప్రాధాన్యత.",
+      doctor_image_alt: "డాక్టర్ చిత్రం",
+      disease_prediction: "రోగ నిర్ధారణ",
+      description: "వివరణ",
+      precautions: "జాగ్రత్తలు",
+      medications: "మందులు",
+      workouts: "వ్యాయామాలు",
+      diet_plan: "ఆహార ప్రణాళిక",
+      check_symptoms: "మీ లక్షణాలను తనిఖీ చేయండి",
+      enter_symptom_placeholder: "మీ లక్షణాన్ని నమోదు చేయండి...",
+      example_symptoms: "ఉదాహరణ: వాంతులు, జలుబు, చర్మం పుల్లలు",
+      select_duration: "కాల వ్యవధిని ఎంచుకోండి",
+      get_recommendation: "సిఫార్సు పొందండి",
+      find_nearby_doctors: "సమీప వైద్యులను కనుగొనండి",
+      enter_location: "ప్రదేశాన్ని నమోదు చేయండి",
+      find_doctors: "వైద్యులను కనుగొనండి",
+      contact: "సంప్రదించండి",
+      contact_description: "మీరు మాతో మాట్లాడాలని కోరుకుంటున్నాము. ప్రశ్నలు, భాగస్వామ్యం లేదా మద్దతు కోసం సంప్రదించండి.",
+      email: "ఇమెయిల్",
+      phone: "ఫోన్",
+      follow_us: "మమ్మల్ని అనుసరించండి",
+      recommendations: "సిఫార్సులు"
+    },
+    bn: {
+      welcome: "স্বাগতম ",
+      mediwise: "MediWise",
+      hero_description: "MediWise আপনার বুদ্ধিমান স্বাস্থ্যসেবা সহকারী, AI দ্বারা চালিত।\nতৎক্ষণাৎ উপসর্গ পরীক্ষা করুন, কাছাকাছি ডাক্তার খুঁজুন, এবং আপনার জন্য উপযুক্ত সুস্থতা টিপস পান।\nসহজ, স্মার্ট এবং নির্ভরযোগ্য – আপনার স্বাস্থ্য, আমাদের অগ্রাধিকার।",
+      doctor_image_alt: "ডাক্তার ছবি",
+      disease_prediction: "রোগ পূর্বাভাস",
+      description: "বর্ণনা",
+      precautions: "সতর্কতা",
+      medications: "ঔষধ",
+      workouts: "ব্যায়াম",
+      diet_plan: "ডায়েট প্ল্যান",
+      check_symptoms: "আপনার উপসর্গ পরীক্ষা করুন",
+      enter_symptom_placeholder: "আপনার উপসর্গ লিখুন...",
+      example_symptoms: "উদাহরণ: বমি, ঠান্ডা, চামড়ার ফুসকুড়ি",
+      select_duration: "সময়কাল নির্বাচন করুন",
+      get_recommendation: "সুপারিশ পান",
+      find_nearby_doctors: "কাছাকাছি ডাক্তার খুঁজুন",
+      enter_location: "অবস্থান লিখুন",
+      find_doctors: "ডাক্তার খুঁজুন",
+      contact: "যোগাযোগ",
+      contact_description: "আমরা আপনার কাছ থেকে শুনতে চাই। প্রশ্ন, অংশীদারিত্ব বা সহায়তার জন্য যোগাযোগ করুন।",
+      email: "ইমেইল",
+      phone: "ফোন",
+      follow_us: "আমাদের অনুসরণ করুন",
+      recommendations: "সুপারিশ"
+    },
+    gu: {
+      welcome: "સ્વાગત છે ",
+      mediwise: "MediWise",
+      hero_description: "MediWise એ તમારો બુદ્ધિશાળી આરોગ્ય સહાયક છે, જે AI દ્વારા સંચાલિત છે.\nતત્કાળ લક્ષણો તપાસો, નજીકના ડૉક્ટર શોધો, અને તમારા માટે યોગ્ય આરોગ્ય સૂચનો મેળવો.\nસુલભ, સ્માર્ટ અને વિશ્વસનીય – તમારું આરોગ્ય, અમારી પ્રાથમિકતા.",
+      doctor_image_alt: "ડૉક્ટર છબી",
+      disease_prediction: "રોગની આગાહી",
+      description: "વર્ણન",
+      precautions: "પૂર્વસાવચેતી",
+      medications: "દવાઓ",
+      workouts: "વ્યાયામ",
+      diet_plan: "આહાર યોજના",
+      check_symptoms: "તમારા લક્ષણો તપાસો",
+      enter_symptom_placeholder: "તમારું લક્ષણ દાખલ કરો...",
+      example_symptoms: "ઉદાહરણ: ઉલટી, ઠંડી, ચામડી પર ફોલ્લી",
+      select_duration: "સમયગાળો પસંદ કરો",
+      get_recommendation: "ભલામણ મેળવો",
+      find_nearby_doctors: "નજીકના ડૉક્ટર શોધો",
+      enter_location: "સ્થાન દાખલ કરો",
+      find_doctors: "ડૉક્ટર શોધો",
+      contact: "સંપર્ક કરો",
+      contact_description: "અમે તમારી પાસેથી સાંભળવા માંગીએ છીએ. પ્રશ્નો, ભાગીદારી અથવા સહાય માટે સંપર્ક કરો.",
+      email: "ઇમેઇલ",
+      phone: "ફોન",
+      follow_us: "અમને અનુસરો",
+      recommendations: "ભલામણો"
+    },
+    kn: {
+      welcome: "ಸ್ವಾಗತ ",
+      mediwise: "MediWise",
+      hero_description: "MediWise ನಿಮ್ಮ ಬುದ್ಧಿವಂತ ಆರೋಗ್ಯ ಸಹಾಯಕ, AI ಮೂಲಕ ಚಾಲಿತವಾಗಿದೆ.\nಕ್ಷಣಾರ್ಧದಲ್ಲಿ ಲಕ್ಷಣಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಹತ್ತಿರದ ವೈದ್ಯರನ್ನು ಹುಡುಕಿ, ಮತ್ತು ನಿಮಗಾಗಿ ಸೂಕ್ತವಾದ ಆರೋಗ್ಯ ಸಲಹೆಗಳನ್ನು ಪಡೆಯಿರಿ.\nಸುಲಭ, ಬುದ್ಧಿವಂತ ಮತ್ತು ನಂಬಿಗಸ್ಥ – ನಿಮ್ಮ ಆರೋಗ್ಯ, ನಮ್ಮ ಆದ್ಯತೆ.",
+      doctor_image_alt: "ವೈದ್ಯರ ಚಿತ್ರ",
+      disease_prediction: "ರೋಗ ಭವಿಷ್ಯವಾಣಿ",
+      description: "ವಿವರಣೆ",
+      precautions: "ಪೂರ್ವಕಾಲಜ್ಞೆ",
+      medications: "ಔಷಧಿಗಳು",
+      workouts: "ವ್ಯಾಯಾಮಗಳು",
+      diet_plan: "ಆಹಾರ ಯೋಜನೆ",
+      check_symptoms: "ನಿಮ್ಮ ಲಕ್ಷಣಗಳನ್ನು ಪರಿಶೀಲಿಸಿ",
+      enter_symptom_placeholder: "ನಿಮ್ಮ ಲಕ್ಷಣವನ್ನು ನಮೂದಿಸಿ...",
+      example_symptoms: "ಉದಾಹರಣೆ: ವಾಂತಿ, ಜ್ವರ, ಚರ್ಮದ ಉರಿ",
+      select_duration: "ಅವಧಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+      get_recommendation: "ಶಿಫಾರಸು ಪಡೆಯಿರಿ",
+      find_nearby_doctors: "ಹತ್ತಿರದ ವೈದ್ಯರನ್ನು ಹುಡುಕಿ",
+      enter_location: "ಸ್ಥಳವನ್ನು ನಮೂದಿಸಿ",
+      find_doctors: "ವೈದ್ಯರನ್ನು ಹುಡುಕಿ",
+      contact: "ಸಂಪರ್ಕಿಸಿ",
+      contact_description: "ನಾವು ನಿಮ್ಮಿಂದ ಕೇಳಲು ಇಚ್ಛಿಸುತ್ತೇವೆ. ಪ್ರಶ್ನೆಗಳು, ಪಾಲುದಾರಿಕೆ ಅಥವಾ ಬೆಂಬಲಕ್ಕಾಗಿ ಸಂಪರ್ಕಿಸಿ.",
+      email: "ಇಮೇಲ್",
+      phone: "ಫೋನ್",
+      follow_us: "ನಮ್ಮನ್ನು ಅನುಸರಿಸಿ",
+      recommendations: "ಶಿಫಾರಸುಗಳು"
+    },
+    ml: {
+      welcome: "സ്വാഗതം ",
+      mediwise: "MediWise",
+      hero_description: "MediWise നിങ്ങളുടെ ബുദ്ധിമാനായ ആരോഗ്യ സഹായി, AI ഉപയോഗിച്ച് പ്രവർത്തിക്കുന്നു.\nഉടൻ ലക്ഷണങ്ങൾ പരിശോധിക്കുക, സമീപ ഡോക്ടർമാരെ കണ്ടെത്തുക, നിങ്ങളുടെ ആരോഗ്യത്തിനായി അനുയോജ്യമായ നിർദ്ദേശങ്ങൾ നേടുക.\nഎളുപ്പം, ബുദ്ധിമുട്ടില്ലാതെ, വിശ്വസനീയമായി – നിങ്ങളുടെ ആരോഗ്യം, ഞങ്ങളുടെ മുൻഗണന.",
+      doctor_image_alt: "ഡോക്ടർ ചിത്രം",
+      disease_prediction: "രോഗ പ്രവചനം",
+      description: "വിവരണം",
+      precautions: "ജാഗ്രതകൾ",
+      medications: "മരുന്നുകൾ",
+      workouts: "വ്യായാമങ്ങൾ",
+      diet_plan: "ആഹാര പദ്ധതി",
+      check_symptoms: "നിങ്ങളുടെ ലക്ഷണങ്ങൾ പരിശോധിക്കുക",
+      enter_symptom_placeholder: "നിങ്ങളുടെ ലക്ഷണം നൽകുക...",
+      example_symptoms: "ഉദാഹരണം: ഛർദി, പനി, ചർമ്മരോഗം",
+      select_duration: "കാലാവധി തിരഞ്ഞെടുക്കുക",
+      get_recommendation: "നിർദ്ദേശം നേടുക",
+      find_nearby_doctors: "സമീപ ഡോക്ടർമാരെ കണ്ടെത്തുക",
+      enter_location: "സ്ഥലം നൽകുക",
+      find_doctors: "ഡോക്ടർമാരെ കണ്ടെത്തുക",
+      contact: "ബന്ധപ്പെടുക",
+      contact_description: "നിങ്ങളിൽ നിന്ന് കേൾക്കാൻ ഞങ്ങൾ ആഗ്രഹിക്കുന്നു. ചോദ്യങ്ങൾ, പങ്കാളിത്തം അല്ലെങ്കിൽ പിന്തുണയ്ക്കായി ബന്ധപ്പെടുക.",
+      email: "ഇമെയിൽ",
+      phone: "ഫോൺ",
+      follow_us: "ഞങ്ങളെ പിന്തുടരുക",
+      recommendations: "നിർദ്ദേശങ്ങൾ"
+    },
+    pa: {
+      welcome: "ਸੁਆਗਤ ਹੈ ",
+      mediwise: "MediWise",
+      hero_description: "MediWise ਤੁਹਾਡਾ ਸਮਾਰਟ ਸਿਹਤ ਸਾਥੀ ਹੈ, ਜੋ AI ਦੁਆਰਾ ਸੰਚਾਲਿਤ ਹੈ।\nਤੁਰੰਤ ਲੱਛਣ ਜਾਂਚੋ, ਨੇੜਲੇ ਡਾਕਟਰ ਲੱਭੋ, ਅਤੇ ਤੁਹਾਡੇ ਲਈ ਸੁਝਾਅ ਪ੍ਰਾਪਤ ਕਰੋ।\nਸੁਲਭ, ਸਮਾਰਟ ਅਤੇ ਭਰੋਸੇਯੋਗ – ਤੁਹਾਡੀ ਸਿਹਤ, ਸਾਡੀ ਤਰਜੀਹ।",
+      doctor_image_alt: "ਡਾਕਟਰ ਚਿੱਤਰ",
+      disease_prediction: "ਬਿਮਾਰੀ ਦੀ ਪੇਸ਼ਗੋਈ",
+      description: "ਵਰਣਨ",
+      precautions: "ਸਾਵਧਾਨੀਆਂ",
+      medications: "ਦਵਾਈਆਂ",
+      workouts: "ਵਿਆਯਾਮ",
+      diet_plan: "ਖੁਰਾਕ ਯੋਜਨਾ",
+      check_symptoms: "ਆਪਣੇ ਲੱਛਣ ਜਾਂਚੋ",
+      enter_symptom_placeholder: "ਆਪਣਾ ਲੱਛਣ ਦਰਜ ਕਰੋ...",
+      example_symptoms: "ਉਦਾਹਰਨ: ਉਲਟੀ, ਜ਼ੁਕਾਮ, ਚਮੜੀ ਦੀ ਖਾਰਸ਼",
+      select_duration: "ਅਵਧੀ ਚੁਣੋ",
+      get_recommendation: "ਸੁਝਾਅ ਪ੍ਰਾਪਤ ਕਰੋ",
+      find_nearby_doctors: "ਨੇੜਲੇ ਡਾਕਟਰ ਲੱਭੋ",
+      enter_location: "ਸਥਾਨ ਦਰਜ ਕਰੋ",
+      find_doctors: "ਡਾਕਟਰ ਲੱਭੋ",
+      contact: "ਸੰਪਰਕ ਕਰੋ",
+      contact_description: "ਅਸੀਂ ਤੁਹਾਡੇ ਤੋਂ ਸੁਣਨਾ ਚਾਹੁੰਦੇ ਹਾਂ। ਪ੍ਰਸ਼ਨ, ਭਾਗੀਦਾਰੀ ਜਾਂ ਸਹਾਇਤਾ ਲਈ ਸੰਪਰਕ ਕਰੋ।",
+      email: "ਈਮੇਲ",
+      phone: "ਫੋਨ",
+      follow_us: "ਸਾਨੂੰ ਫਾਲੋ ਕਰੋ",
+      recommendations: "ਸੁਝਾਅ"
+    },
+    or: {
+      welcome: "ସ୍ୱାଗତମ୍ ",
+      mediwise: "MediWise",
+      hero_description: "MediWise ହେଉଛି ଆପଣଙ୍କର ବୁଦ୍ଧିମତୀ ସ୍ୱାସ୍ଥ୍ୟ ସହଯୋଗୀ, AI ଦ୍ୱାରା ଚାଳିତ।\nତୁରନ୍ତ ଲକ୍ଷଣ ଯାଞ୍ଚ କରନ୍ତୁ, ନିକଟସ୍ଥ ଡାକ୍ତର ଖୋଜନ୍ତୁ, ଏବଂ ଆପଣଙ୍କ ପାଇଁ ଉପଯୁକ୍ତ ସ୍ୱାସ୍ଥ୍ୟ ପରାମର୍ଶ ପାଆନ୍ତୁ।\nସହଜ, ବୁଦ୍ଧିମତୀ ଏବଂ ବିଶ୍ୱସନୀୟ – ଆପଣଙ୍କର ସ୍ୱାସ୍ଥ୍ୟ, ଆମ ପ୍ରାଥମିକତା।",
+      doctor_image_alt: "ଡାକ୍ତର ଛବି",
+      disease_prediction: "ରୋଗ ପୂର୍ବାନୁମାନ",
+      description: "ବର୍ଣ୍ଣନା",
+      precautions: "ସାବଧାନୀ",
+      medications: "ଔଷଧ",
+      workouts: "ଅଭ୍ୟାସ",
+      diet_plan: "ଖାଦ୍ୟ ଯୋଜନା",
+      check_symptoms: "ଆପଣଙ୍କର ଲକ୍ଷଣ ଯାଞ୍ଚ କରନ୍ତୁ",
+      enter_symptom_placeholder: "ଆପଣଙ୍କର ଲକ୍ଷଣ ଦାଖଲ କରନ୍ତୁ...",
+      example_symptoms: "ଉଦାହରଣ: ବାନ୍ତି, ଜ୍ୱର, ଚର୍ମ ରୋଗ",
+      select_duration: "ସମୟ ଅବଧି ଚୟନ କରନ୍ତୁ",
+      get_recommendation: "ପରାମର୍ଶ ପାଆନ୍ତୁ",
+      find_nearby_doctors: "ନିକଟସ୍ଥ ଡାକ୍ତର ଖୋଜନ୍ତୁ",
+      enter_location: "ଅବସ୍ଥାନ ଦାଖଲ କରନ୍ତୁ",
+      find_doctors: "ଡାକ୍ତର ଖୋଜନ୍ତୁ",
+      contact: "ଯୋଗାଯୋଗ",
+      contact_description: "ଆମେ ଆପଣଙ୍କର ମତାମତ ଶୁଣିବାକୁ ଚାହୁଁଛୁ। ପ୍ରଶ୍ନ, ଭାଗୀଦାରି କିମ୍ବା ସହଯୋଗ ପାଇଁ ଯୋଗାଯୋଗ କରନ୍ତୁ।",
+      email: "ଇମେଲ୍",
+      phone: "ଫୋନ୍",
+      follow_us: "ଆମକୁ ଅନୁସରଣ କରନ୍ତୁ",
+      recommendations: "ପରାମର୍ଶ"
+    },
+    bh: {
+      welcome: "स्वागत बा ",
+      mediwise: "MediWise",
+      hero_description: "MediWise तोहार होशियार स्वास्थ्य साथी ह, जे AI से चलेला।\nतुरंत लक्षण देखीं, नजदीकी डॉक्टर खोजीं, आ तोहरे खातिर बढ़िया सलाह पाईं।\nआसान, होशियार आ भरोसेमंद – तोहार स्वास्थ्य, हमार प्राथमिकता。",
+      doctor_image_alt: "डॉक्टर के फोटो",
+      disease_prediction: "बीमारी के अनुमान",
+      description: "विवरण",
+      precautions: "सावधानी",
+      medications: "दवाई",
+      workouts: "व्यायाम",
+      diet_plan: "डाइट प्लान",
+      check_symptoms: "आपन लक्षण देखीं",
+      enter_symptom_placeholder: "आपन लक्षण लिखीं...",
+      example_symptoms: "उदाहरण: उल्टी, सर्दी, चर्म रोग",
+      select_duration: "अवधि चुनल जाव",
+      get_recommendation: "सलाह पाईं",
+      find_nearby_doctors: "नजदीकी डॉक्टर खोजीं",
+      enter_location: "जगह लिखीं",
+      find_doctors: "डॉक्टर खोजीं",
+      contact: "संपर्क करीं",
+      contact_description: "हम रउरा से सुने के चाहत बानी। सवाल, साझेदारी या मदद खातिर संपर्क करीं।",
+      email: "ईमेल",
+      phone: "फोन",
+      follow_us: "हमके फॉलो करीं",
+      recommendations: "सलाह"
+    },
+    as: {
+      welcome: "স্বাগতম ",
+      mediwise: "MediWise",
+      hero_description: "MediWise আপোনাৰ বুদ্ধিমান স্বাস্থ্য সহায়ক, AI দ্বাৰা চালিত।\nতৎক্ষণাত লক্ষণ পৰীক্ষা কৰক, ওচৰৰ চিকিৎসক বিচাৰক, আৰু আপোনাৰ বাবে উপযুক্ত স্বাস্থ্য পৰামৰ্শ লাভ কৰক।\nসহজ, বুদ্ধিমান আৰু বিশ্বাসযোগ্য – আপোনাৰ স্বাস্থ্য, আমাৰ প্ৰাধান্য।",
+      doctor_image_alt: "ডাক্তৰৰ ছবি",
+      disease_prediction: "ৰোগ পূৰ্বানুমান",
+      description: "বিৱৰণ",
+      precautions: "সাৱধানতা",
+      medications: "ঔষধ",
+      workouts: "ব্যায়াম",
+      diet_plan: "ডায়েট পৰিকল্পনা",
+      check_symptoms: "আপোনাৰ লক্ষণ পৰীক্ষা কৰক",
+      enter_symptom_placeholder: "আপোনাৰ লক্ষণ লিখক...",
+      example_symptoms: "উদাহৰণ: বমি, ঠাণ্ডা, ছালৰ ৰোগ",
+      select_duration: "সময়কাল নিৰ্বাচন কৰক",
+      get_recommendation: "পৰামৰ্শ লাভ কৰক",
+      find_nearby_doctors: "ওচৰৰ চিকিৎসক বিচাৰক",
+      enter_location: "অৱস্থান লিখক",
+      find_doctors: "চিকিৎসক বিচাৰক",
+      contact: "যোগাযোগ কৰক",
+      contact_description: "আমি আপোনাৰ পৰা শুনিবলৈ বিচাৰো। প্ৰশ্ন, অংশীদাৰিত্ব বা সহায়ৰ বাবে যোগাযোগ কৰক।",
+      email: "ইমেইল",
+      phone: "ফোন",
+      follow_us: "আমাক অনুসৰণ কৰক",
+      recommendations: "পৰামৰ্শ"
+    },
+    ur: {
+      welcome: "خوش آمدید ",
+      mediwise: "MediWise",
+      hero_description: "MediWise آپ کا ذہین صحت کا ساتھی ہے، جو AI کے ذریعے چلتا ہے۔\nفوری طور پر علامات چیک کریں، قریبی ڈاکٹر تلاش کریں، اور آپ کے لیے موزوں صحت کے مشورے حاصل کریں۔\nآسان، ذہین اور قابل اعتماد – آپ کی صحت، ہماری ترجیح۔",
+      doctor_image_alt: "ڈاکٹر کی تصویر",
+      disease_prediction: "بیماری کی پیش گوئی",
+      description: "تفصیل",
+      precautions: "احتیاطی تدابیر",
+      medications: "ادویات",
+      workouts: "ورزشیں",
+      diet_plan: "غذائی منصوبہ",
+      check_symptoms: "اپنی علامات چیک کریں",
+      enter_symptom_placeholder: "اپنی علامت درج کریں...",
+      example_symptoms: "مثال: الٹی، زکام، جلد پر خارش",
+      select_duration: "دورانیہ منتخب کریں",
+      get_recommendation: "تجویز حاصل کریں",
+      find_nearby_doctors: "قریبی ڈاکٹر تلاش کریں",
+      enter_location: "مقام درج کریں",
+      find_doctors: "ڈاکٹر تلاش کریں",
+      contact: "رابطہ کریں",
+      contact_description: "ہم آپ سے سننا چاہیں گے۔ سوالات، شراکت داری یا مدد کے لیے رابطہ کریں۔",
+      email: "ای میل",
+      phone: "فون",
+      follow_us: "ہمیں فالو کریں",
+      recommendations: "تجاویز"
+    },
+    mni: {
+      welcome: "মেদিওয়াইজদা স্বাগতম",
+      mediwise: "MediWise",
+      hero_description: "MediWise হৌজিংগী নুপী মখল, AI-না তৌরবা।\nমখল ফমদা symptoms চেক তৌ, মখলগী doctor-sing খংদোকপা, amasung মখলগী wellness tips পাঙবা।\nমখলগী স্বাস্থ্য, মখলগী অগ্রাধিকার।",
+      doctor_image_alt: "Doctor Image",
+      disease_prediction: "রোগ অনুমান",
+      description: "বর্ণনা",
+      precautions: "সতর্কতা",
+      medications: "ঔষধ",
+      workouts: "ব্যায়াম",
+      diet_plan: "ডায়েট প্ল্যান",
+      check_symptoms: "লক্ষণসমূহ চেক করুন",
+      enter_symptom_placeholder: "লক্ষণসমূহ লিখুন...",
+      example_symptoms: "উদাহরণ: বমি, ঠাণ্ডা, চামড়ার ফুসকুড়ি",
+      select_duration: "সময়কাল নির্বাচন করুন",
+      get_recommendation: "সুপারিশ পান",
+      find_nearby_doctors: "নগদ doctor খংদোকপা",
+      enter_location: "স্থান লিখুন",
+      find_doctors: "doctor খংদোকপা",
+      contact: "যোগাযোগ",
+      contact_description: "আমা মখলগী মতামত পাঙবা। প্রশ্ন, অংশীদারিত্ব বা সহায়ৰ বাবে যোগাযোগ করুন।",
+      email: "ইমেইল",
+      phone: "ফোন",
+      follow_us: "আমাক অনুসৰণ কৰক",
+      recommendations: "সুপারিশ"
+    },
+    ne: {
+      welcome: "स्वागत छ ",
+      mediwise: "MediWise",
+      hero_description: "MediWise तपाईंको बुद्धिमान स्वास्थ्य साथी हो, AI द्वारा सञ्चालित।\nतुरुन्तै लक्षण जाँच गर्नुहोस्, नजिकका डाक्टरहरू खोज्नुहोस्, र तपाईंका लागि उपयुक्त स्वास्थ्य सुझावहरू प्राप्त गर्नुहोस्।\nसुलभ, स्मार्ट र भरपर्दो – तपाईंको स्वास्थ्य, हाम्रो प्राथमिकता।",
+      doctor_image_alt: "डाक्टरको तस्बिर",
+      disease_prediction: "रोग पूर्वानुमान",
+      description: "विवरण",
+      precautions: "सावधानी",
+      medications: "औषधि",
+      workouts: "व्यायाम",
+      diet_plan: "आहार योजना",
+      check_symptoms: "आफ्नो लक्षण जाँच गर्नुहोस्",
+      enter_symptom_placeholder: "आफ्नो लक्षण लेख्नुहोस्...",
+      example_symptoms: "उदाहरण: बान्ता, ज्वरो, छालामा डाबर",
+      select_duration: "अवधि चयन गर्नुहोस्",
+      get_recommendation: "सिफारिस प्राप्त गर्नुहोस्",
+      find_nearby_doctors: "नजिकका डाक्टरहरू खोज्नुहोस्",
+      enter_location: "स्थान लेख्नुहोस्",
+      find_doctors: "डाक्टरहरू खोज्नुहोस्",
+      contact: "सम्पर्क गर्नुहोस्",
+      contact_description: "हामी तपाईंको प्रतिक्रिया सुन्न चाहन्छौं। प्रश्न, साझेदारी वा सहयोगका लागि सम्पर्क गर्नुहोस्।",
+      email: "इमेल",
+      phone: "फोन",
+      follow_us: "हामीलाई पछ्याउनुहोस्",
+      recommendations: "सिफारिसहरू"
+    },
+    sd: {
+      welcome: "ڀليڪار ",
+      mediwise: "MediWise",
+      hero_description: "MediWise توهانجو ذهين صحت جو ساٿي آهي، جيڪو AI ذريعي هلندو آهي۔\nفوري طور تي علامتون چيڪ ڪريو، ويجها ڊاڪٽر ڳوليو، ۽ توهان لاءِ مناسب صحت جا مشورا حاصل ڪريو۔\nآسان، ذهين ۽ قابل اعتماد – توهانجي صحت، اسانجي ترجيح۔",
+      doctor_image_alt: "ڊاڪٽر جي تصوير",
+      disease_prediction: "بيماري جي اڳڪٿي",
+      description: "وضاحت",
+      precautions: "احتياطون",
+      medications: "دوائون",
+      workouts: "ورزشون",
+      diet_plan: "غذائي منصوبا",
+      check_symptoms: "پنهنجون علامتون چيڪ ڪريو",
+      enter_symptom_placeholder: "پنهنجي علامت لکو...",
+      example_symptoms: "مثال: الٽي، بخار، چمڙي تي خارش",
+      select_duration: "مدت چونڊيو",
+      get_recommendation: "سفارش حاصل ڪريو",
+      find_nearby_doctors: "ويجها ڊاڪٽر ڳوليو",
+      enter_location: "جڳهه لکو",
+      find_doctors: "ڊاڪٽر ڳوليو",
+      contact: "رابطو ڪريو",
+      contact_description: "اسان توهان کان ٻڌڻ چاهيون ٿا. سوال، ڀائيواري يا مدد لاءِ رابطو ڪريو.",
+      email: "اي ميل",
+      phone: "فون",
+      follow_us: "اسان کي فالو ڪريو",
+      recommendations: "سفارشون"
+    },
+    kok: {
+      welcome: "स्वागत",
+      mediwise: "MediWise",
+      hero_description: "MediWise तुमका बुद्धिशीर आरोग्य सहकारी, AI द्वारे चालित.\nतात्काळ लक्षण तपासा, जवळचे डॉक्टर शोधा, आणि तुमका योग्य आरोग्य सूचना मेळयात.\nसोप, बुद्धिशीर आनी विश्वासार्ह – तुमचो आरोग्य, आमची प्राधान्य.",
+      doctor_image_alt: "डॉक्टराचो फोटो",
+      disease_prediction: "रोगाची भाकीत",
+      description: "वर्णन",
+      precautions: "सावधगिरी",
+      medications: "औषधां",
+      workouts: "व्यायाम",
+      diet_plan: "आहार योजना",
+      check_symptoms: "तुमचे लक्षण तपासा",
+      enter_symptom_placeholder: "तुमचे लक्षण लिहा...",
+      example_symptoms: "उदाहरण: उलटी, थंडी, त्वचेवर पुरळ",
+      select_duration: "कालावधी निवडा",
+      get_recommendation: "शिफारस मेळयात",
+      find_nearby_doctors: "जवळचे डॉक्टर शोधा",
+      enter_location: "स्थान लिहा",
+      find_doctors: "डॉक्टर शोधा",
+      contact: "संपर्क करा",
+      contact_description: "आमका तुमका ऐकयाक आवडता. प्रश्न, भागीदारी वा मदती खातीर संपर्क करा.",
+      email: "ईमेल",
+      phone: "फोन",
+      follow_us: "आमका फॉलो करा",
+      recommendations: "शिफारसी"
+    },
+    san: {
+      welcome: "स्वागतम् ",
+      mediwise: "MediWise",
+      hero_description: "MediWise भवतः बुद्धिमान् स्वास्थ्यसहायकः, AI द्वारा सञ्चालितः।\nतत्क्षणमेव लक्षणानि परीक्ष्यन्ताम्, समीपस्थाः चिकित्सकाः अन्विष्यन्ताम्, च भवतः कृते उपयुक्ताः स्वास्थ्यसूचनाः लभ्यन्ताम्।\nसुलभम्, बुद्धिमत्, विश्वसनीयम् – भवतः स्वास्थ्यं, अस्माकं प्राथमिकता।",
+      doctor_image_alt: "चिकित्सकस्य चित्रम्",
+      disease_prediction: "रोगपूर्वानुमानम्",
+      description: "विवरणम्",
+      precautions: "सावधानयः",
+      medications: "औषधानि",
+      workouts: "व्यायामाः",
+      diet_plan: "आहारयोजना",
+      check_symptoms: "स्वस्य लक्षणानि परीक्ष्यन्ताम्",
+      enter_symptom_placeholder: "स्वस्य लक्षणं लिखत...",
+      example_symptoms: "उदाहरणम्: वान्ति, शीत, त्वचायाः रोगः",
+      select_duration: "कालावधिं चिनुत",
+      get_recommendation: "सिफारिशं प्राप्नु",
+      find_nearby_doctors: "समीपस्थाः चिकित्सकाः अन्विष्यन्ताम्",
+      enter_location: "स्थानं लिखत",
+      find_doctors: "चिकित्सकान् अन्विष्यन्ताम्",
+      contact: "सम्पर्कः",
+      contact_description: "वयं भवतः मतं श्रोतुम् इच्छामः। प्रश्नान्, साझेदारीं वा सहाय्यार्थं सम्पर्कं कुर्वन्तु।",
+      email: "ईमेल्",
+      phone: "दूरवाणी",
+      follow_us: "अनुसरन्तु",
+      recommendations: "सिफारिशः"
+    },
+    ks: {
+      welcome: "خوش آمدید ",
+      mediwise: "MediWise",
+      hero_description: "MediWise تُهند ذہین صحت ساتھی چھُ، AI ہند استعمال کرنہ۔\nفوراً علامات چیک کرٕو، نزدیکی ڈاکٹر تلاش کرٕو، تہ تُہند خاطر صحت مشورہ حاصل کرٕو۔\nآسان، ذہین تہ قابلِ اعتماد – تُہند صحت، اسین ترجیح۔",
+      doctor_image_alt: "ڈاکٹر چھ تصویر",
+      disease_prediction: "بیماری چھ پیشگوئی",
+      description: "وضاحت",
+      precautions: "احتیاطی تدابیر",
+      medications: "دوائیاں",
+      workouts: "ورزش",
+      diet_plan: "غذائی منصوبہ",
+      check_symptoms: "اپنی علامات چیک کرٕو",
+      enter_symptom_placeholder: "اپنی علامت لکھو...",
+      example_symptoms: "مثال: الٹی، زکام، جلد پر خارش",
+      select_duration: "مدت منتخب کرٕو",
+      get_recommendation: "سفارش حاصل کرٕو",
+      find_nearby_doctors: "نزدیکی ڈاکٹر تلاش کرٕو",
+      enter_location: "جگہ لکھو",
+      find_doctors: "ڈاکٹر تلاش کرٕو",
+      contact: "رابطہ کرٕو",
+      contact_description: "اسین تُہند پیغام سننہ چاہان۔ سوال، شراکت یا مدد خاطر رابطہ کرٕو۔",
+      email: "ای میل",
+      phone: "فون",
+      follow_us: "اسین پیچھے آو",
+      recommendations: "سفارشات"
+    },
+  // Add more languages here as needed
+};
 
   function updateTranslations(lang) {
     const t = translations[lang] || translations['en'];
@@ -860,37 +1429,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-const translations = {
-  en: {
-    disease_prediction: "Disease Prediction",
-    description: "Description",
-    precautions: "Precautions",
-    medications: "Medications",
-    workouts: "Workouts",
-    diet_plan: "Diet Plan",
-    recommendations: "Recommendations",
-    welcome: "Welcome to ",
-    mediwise: "MediWise",
-    hero_description: "MediWise is your intelligent healthcare companion powered by AI.<br> Instantly check symptoms, find nearby doctors, and receive wellness tips tailored to you.<br> Accessible, smart, and reliable – your health, our priority.",
-    doctor_image_alt: "Doctor illustration",
-    check_symptoms: "Check Your Symptoms",
-    enter_symptom_placeholder: "Enter your symptom...",
-    example_symptoms: "Example: vomiting, shivering, skin_rash",
-    select_duration: "Select duration",
-    get_recommendation: "Get Recommendation",
-    find_nearby_doctors: "Find Nearby Doctors",
-    enter_location: "Enter location",
-    find_doctors: "Find Doctors",
-    contact: "Get in Touch",
-    contact_description: "",
-    email: "Email",
-    phone: "Phone",
-    follow_us: "Follow Us"
-  }
-}; // <-- Properly close the object here
-// Add more languages here as needed
-
-
+  const languageSelect = document.getElementById('language-select');
+  languageSelect.addEventListener('change', function() {
+    updateTranslations(this.value);
+  });
+});
 
 // Find Doctors function (fixed syntax)
 function findDoctors() {
@@ -959,9 +1502,8 @@ function findDoctors() {
     console.error(err);
   });
 }
-
-}); // <-- Add this closing brace to end the DOMContentLoaded event listener
 </script>
 
 </body>
 </html>
+
