@@ -37,34 +37,37 @@
           <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
           <li class="nav__item"><a href="#services" class="nav__link">Services</a></li>
           <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-          <li class="nav__item">
-            <label for="language-select">Languages</label>
-            <select id="language-select" class="lang-select">
-              <option value="en">English</option>
-              <option value="hi">Hindi (हिन्दी)</option>
-              <option value="mr">Marathi (मराठी)</option>
-              <option value="ta">Tamil (தமிழ்)</option>
-              <option value="te">Telugu (తెలుగు)</option>
-              <option value="bn">Bengali (বাংলা)</option>
-              <option value="gu">Gujarati (ગુજરાતી)</option>
-              <option value="kn">Kannada (ಕನ್ನಡ)</option>
-              <option value="ml">Malayalam (മലയാളം)</option>
-              <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
-              <option value="or">Odia (ଓଡ଼ିଆ)</option>
-              <option value="ur">Urdu (اردو)</option>
-              <option value="as">Assamese (অসমীয়া)</option>
-              <option value="bh">Bhojpuri (भोजपुरी)</option>
-              <option value="mni">Manipuri (মৈতৈলোন)</option>
-              <option value="ne">Nepali (नेपाली)</option>
-              <option value="sd">Sindhi (سنڌي)</option>
-              <option value="kok">Konkani (कोंकणी)</option>
-              <option value="ks">Kashmiri (كشميري)</option>
-              <option value="san">Sanskrit (संस्कृत)</option>
-            </select>
-          </li>
-          <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
-        </ul>
-      </div>
+         <li class="nav__item">
+  <!-- Hidden Google Translate Widget -->
+<script defer src="../static/main.js"></script>
+
+<select id="language-select" class="lang-select">
+  <option value="">Select Language</option>
+  <option value="en">English</option>
+  <option value="hi">Hindi (हिन्दी)</option>
+  <option value="mr">Marathi (मराठी)</option>
+  <option value="ta">Tamil (தமிழ்)</option>
+  <option value="te">Telugu (తెలుగు)</option>
+  <option value="bn">Bengali (বাংলা)</option>
+  <option value="gu">Gujarati (ગુજરાતી)</option>
+  <option value="kn">Kannada (ಕನ್ನಡ)</option>
+  <option value="ml">Malayalam (മലയാളം)</option>
+  <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+  <option value="or">Odia (ଓଡ଼ିଆ)</option>
+  <option value="ur">Urdu (اردو)</option>
+  <option value="as">Assamese (অসমীয়া)</option>
+  <option value="bh">Bhojpuri (भोजपुरी)</option>
+  <option value="mni">Manipuri (মৈতৈলোন)</option>
+  <option value="ne">Nepali (नेपाली)</option>
+  <option value="sd">Sindhi (سنڌي)</option>
+  <option value="kok">Konkani (कोंकणी)</option>
+  <option value="ks">Kashmiri (كٲشُر)</option>
+  <option value="sa">Sanskrit (संस्कृतम्)</option>
+</select>
+
+</li>
+<li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+
     </nav>
   </header>
 
@@ -78,7 +81,7 @@
         </div>
         <div class="home__lottie" style="flex: 1; display: flex; align-items: center; justify-content: flex-end;">
          <lottie-player
-  src="DOCTOR.json"
+  src="../static/DOCTOR.json"
   background="transparent"
   speed="1"
   style="width: 400px; height: 400px;"
@@ -99,7 +102,7 @@
     <!-- Lottie Animation on the Left -->
     <div class="home__lottie" style="display: flex; align-items: center; justify-content: flex-start;">
       <lottie-player
-        src="Patient lottie.json"
+        src="../static/Patient lottie.json"
         background="transparent"
         speed="1"
         style="width: 400px; height: 400px;"
@@ -123,29 +126,27 @@
 
 
             <!--========== SERVICES ==========-->
-             <section class="services section bd-container" id="services">
-      <span class="section-subtitle">Our Services</span>
-      <h2 class="section-title">What We Offer</h2>
-      <div class="services__container">
-       <a href="symptom_checker.html" class="service-card">
-
-          <i class='bx bx-heart'></i>
-          <h3>AI Symptom Checker</h3>
-          <p>Instantly analyze symptoms & get smart advice.</p>
-        </a>
-        <a href="find_doctors.html" class="service-card">
-
-          <i class='bx bx-user-md'></i>
-          <h3>Find Nearby Doctors</h3>
-          <p>Locate trusted healthcare professionals near you.</p>
-        </a>
-        <a  class="service-card">
-          <i class='bx bx-capsule'></i>
-          <h3>Multi Language Support</h3>
-          <p>Available in 18+ Indian Languages.</p>
-        </a>
-      </div>
-    </section>
+           <section class="services section bd-container" id="services">
+  <span class="section-subtitle">Our Services</span>
+  <h2 class="section-title">What We Offer</h2>
+  <div class="services__container">
+    <a href="/symptom_checker" class="service-card">
+      <i class='bx bx-heart'></i>
+      <h3>AI Symptom Checker</h3>
+      <p>Instantly analyze symptoms & get smart advice.</p>
+    </a>
+    <a href="/find_doctors" class="service-card">
+      <i class='bx bx-user-md'></i>
+      <h3>Find Nearby Doctors</h3>
+      <p>Locate trusted healthcare professionals near you.</p>
+    </a>
+    <a class="service-card">
+      <i class='bx bx-capsule'></i>
+      <h3>Multi Language Support</h3>
+      <p>Available in 18+ Indian Languages.</p>
+    </a>
+  </div>
+</section>
   </main>
 
             <!--========== CONTACT US ==========-->
@@ -180,8 +181,8 @@
                 <div class="footer__content">
                     <h3 class="footer__title">Services</h3>
                     <ul>
-                        <li><a href="symptom_checker.html" class="footer__link">AI Symptom Checker</a></li>
-                        <li><a href="find_doctors.html" class="footer__link">Find Doctors</a></li>
+                        <li><a href="/symptom_checker" class="footer__link">AI Symptom Checker</a></li>
+                        <li><a href="/find_doctors" class="footer__link">Find Doctors</a></li>
                         <li><a href="#" class="footer__link">Multi Language Support</a></li>
                     </ul>
                 </div>
@@ -238,6 +239,24 @@
       
       // Add 'selected' class to clicked card
       card.classList.add('selected');
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const userSelect = document.getElementById("language-select");
+
+    userSelect.addEventListener("change", () => {
+      const selectedLang = userSelect.value;
+      const googleCombo = document.querySelector(".goog-te-combo");
+
+      if (!googleCombo) {
+        alert("Translator not loaded yet. Please wait a moment and try again.");
+        return;
+      }
+
+      googleCombo.value = selectedLang;
+      googleCombo.dispatchEvent(new Event("change"));
     });
   });
 </script>

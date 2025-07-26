@@ -719,3 +719,31 @@ img{
     }
 }
 
+#google_translate_element {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+/* Hide Google's dropdown and badge */
+.goog-te-banner-frame.skiptranslate, 
+.goog-te-gadget-icon,
+.goog-logo-link,
+.goog-te-gadget {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+/* Prevent page from shifting down */
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+ #mapid {
+            height: 500px; /* Set a height for your map container */
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }

@@ -105,3 +105,144 @@ sr.reveal(`.home__data, .home__img,
             .footer__content`, {
     interval: 200
 })
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const userSelect = document.getElementById("language-select");
+
+    userSelect.addEventListener("change", () => {
+      const selectedLang = userSelect.value;
+      const googleCombo = document.querySelector(".goog-te-combo");
+
+      if (!googleCombo) {
+        alert("Translator not loaded yet. Please wait a moment and try again.");
+        return;
+      }
+
+      googleCombo.value = selectedLang;
+      googleCombo.dispatchEvent(new Event("change"));
+    });
+  });
+
+ 
+  // NEW JAVASCRIPT FOR MAP AND DOCTOR SEARCH
+document.addEventListener('DOMContentLoaded', () => {
+    const mapStatusDiv = document.getElementById('map-status');
+    const findDoctorsBtn = document.getElementById('findDoctorsBtn');
+    let map; // Declare map variable globally or in a scope accessible to functions
+
+    // Initialize the map only if the mapid element exists
+    if (document.getElementById('mapid')) {
+        // Set default view (e.g., a central location like London)
+        // This will be updated to the user's location if geolocation is successful.
+        map = L.map('mapid').setView([51.505, -0.09], 13);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        mapStatusDiv.textContent = 'Map loaded. Click "Find Nearby Doctors" to begin.';
+    } else {
+        mapStatusDiv.textContent = 'Map container not found. Ensure #mapid exists in index.html.';
+    }
+
+    // Event listener for the "Find Nearby Doctors" button
+    if (findDoctorsBtn) {
+        findDoctorsBtn.addEventListener('click', findDoctors);
+    }
+
+    function findDoctors() {
+        if (!map) {
+            mapStatusDiv.textContent = 'Map not initialized. Cannot find doctors.';
+            return;
+        }
+
+        mapStatusDiv.textContent = 'Locating you...';
+        findDoctorsBtn.disabled = true; // Disable button during search
+
+        // Get user's current geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    mapStatusDiv.textContent = `Located at: ${lat.toFixed(4)}, ${lon.toFixed(4)}. Searching for doctors...`;
+                    map.setView([lat, lon], 14); // Center map on user's location
+
+                    // Clear existing markers if any
+                    map.eachLayer((layer) => {
+                        if (layer instanceof L.Marker) {
+                            map.removeLayer(layer);
+                        }
+                    });
+
+                    // Call backend to find doctors
+                    fetch('/find_doctors', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ latitude: lat, longitude: lon })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            // If response is not OK (e.g., 404, 500), throw an error
+                            return response.json().then(err => { throw new Error(err.error || 'Server error'); });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.doctors && data.doctors.length > 0) {
+                            mapStatusDiv.textContent = `Found ${data.doctors.length} doctors nearby!`;
+                            data.doctors.forEach(doctor => {
+                                // Add a marker for each doctor
+                                L.marker([doctor.lat, doctor.lon])
+                                    .addTo(map)
+                                    .bindPopup(`<b>${doctor.name || 'Doctor'}</b><br>${doctor.address || 'Address not available'}`)
+                                    .openPopup();
+                            });
+                        } else {
+                            mapStatusDiv.textContent = 'No doctors found nearby.';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching doctors:', error);
+                        mapStatusDiv.textContent = `Error: ${error.message}. Could not find doctors.`;
+                    })
+                    .finally(() => {
+                        findDoctorsBtn.disabled = false; // Re-enable button
+                    });
+                },
+                (error) => {
+                    // Handle geolocation errors
+                    findDoctorsBtn.disabled = false;
+                    let errorMessage;
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage = "Geolocation permission denied. Please allow location access.";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = "Location information is unavailable.";
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = "The request to get user location timed out.";
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            errorMessage = "An unknown geolocation error occurred.";
+                            break;
+                        default:
+                            errorMessage = "Geolocation error.";
+                    }
+                    mapStatusDiv.textContent = `Error: ${errorMessage}`;
+                    console.error('Geolocation error:', error);
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } // Geolocation options
+            );
+        } else {
+            findDoctorsBtn.disabled = false;
+            mapStatusDiv.textContent = 'Geolocation is not supported by your browser.';
+        }
+    }
+});

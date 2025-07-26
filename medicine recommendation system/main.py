@@ -73,11 +73,19 @@ def get_predicted_value(patient_symptoms):
 
 # creating routes========================================
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
+@app.route('/services')
+def services():
+    return render_template('services.html')
 @app.route("/")
 def index():
     return render_template("index.html")
-
+@app.route('/symptom_checker')
+def symptom_checker():
+    return render_template('symptom_checker.html')
 # Define a route for the home page
 @app.route('/predict', methods=['GET', 'POST'])
 def home():
@@ -120,62 +128,60 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/find_doctors', methods=['GET'])
+def find_doctors_page():
+    return render_template('find_doctors.html')
 
-@app.route('/find_doctors', methods=['POST'])
-def find_doctors():
+@app.route('/api/find_doctors', methods=['POST'])
+def find_doctors_api():
     location = request.json.get('location')
-
     if not location:
         return jsonify({'error': 'No location provided'}), 400
 
+    # Geocode location
     geo_url = f'https://nominatim.openstreetmap.org/search?q={location}&format=json&limit=1'
-    headers = {'User-Agent': 'MediWiseApp/1.0 (your_email@example.com)'}  # Use a real email
-
-    try:
-        geo_resp = requests.get(geo_url, headers=headers, timeout=10)
-        geo_resp.raise_for_status()
-        geo_data = geo_resp.json()
-    except Exception as e:
-        return jsonify({'error': f'Geocoding failed: {str(e)}'}), 500
-
-    if not geo_data or not isinstance(geo_data, list) or not geo_data[0].get('lat') or not geo_data[0].get('lon'):
+    geo_resp = requests.get(geo_url, headers={'User-Agent': 'MediwiseApp'})
+    geo_data = geo_resp.json()
+    if not geo_data:
         return jsonify({'error': 'Location not found'}), 404
-
     lat = float(geo_data[0]['lat'])
     lon = float(geo_data[0]['lon'])
 
-    # 🩺 Query Overpass API for doctors around the location
-    overpass_url = "http://overpass-api.de/api/interpreter"
+    # Overpass API query
+    radius = 5000
     overpass_query = f"""
     [out:json];
-    node
-    [amenity=doctors]
-    (around:3000,{lat},{lon});
-    out;
+    (
+      node["amenity"="doctors"](around:{radius},{lat},{lon});
+      node["healthcare"="doctor"](around:{radius},{lat},{lon});
+    );
+    out body;
     """
-    try:
-        overpass_resp = requests.post(overpass_url, data=overpass_query, headers=headers, timeout=15)
-        overpass_resp.raise_for_status()
-        overpass_data = overpass_resp.json()
-    except Exception as e:
-        return jsonify({'error': f'Overpass API failed: {str(e)}'}), 500
+    response = requests.post("https://overpass-api.de/api/interpreter", data=overpass_query)
+    osm_data = response.json()
+    doctors_found = []
 
-    doctors = []
-    for element in overpass_data.get('elements', []):
-        name = element.get('tags', {}).get('name', 'Unknown Doctor')
-        address = element.get('tags', {}).get('addr:full') or "No address provided"
-        doctors.append({
+    for element in osm_data.get('elements', []):
+     if element['type'] == 'node':
+        tags = element.get('tags', {})
+        name = tags.get('name', 'Doctor')
+        address = tags.get('addr:street', 'Address not specified')
+        specialty = tags.get('speciality') or tags.get('specialty') or "General"
+        phone = tags.get('phone') or tags.get('contact:phone') or "Not available"
+        doctors_found.append({
+            "name": name,
             "lat": element['lat'],
             "lon": element['lon'],
-            "name": name,
-            "address": address
+            "address": address,
+            "specialty": specialty,
+            "phone": phone
         })
-
-    # fallback if none found
-    
-
-    return jsonify({'doctors': doctors, 'center': {'lat': lat, 'lon': lon}})
-
+            
+    return jsonify({
+        "center": {"lat": lat, "lon": lon},
+        "doctors": doctors_found
+    })
+    # ...inside your find_doctors_api route...
 
 if __name__ == '__main__':
 
