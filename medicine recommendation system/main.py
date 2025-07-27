@@ -67,14 +67,19 @@ with open(model_path('features.pkl'), 'rb') as f:
 
 # Build symptoms_dict dynamically
 symptoms_dict = {feat: idx for idx, feat in enumerate(feature_names)}
-diseases_list = {15: 'Fungal infection', 4: 'Allergy', 16: 'GERD', 9: 'Chronic cholestasis', 14: 'Drug Reaction', 33: 'Peptic ulcer diseae', 1: 'AIDS', 12: 'Diabetes ', 17: 'Gastroenteritis', 6: 'Bronchial Asthma', 23: 'Hypertension ', 30: 'Migraine', 7: 'Cervical spondylosis', 32: 'Paralysis (brain hemorrhage)', 28: 'Jaundice', 29: 'Malaria', 8: 'Chicken pox', 11: 'Dengue', 37: 'Typhoid', 40: 'hepatitis A', 19: 'Hepatitis B', 20: 'Hepatitis C', 21: 'Hepatitis D', 22: 'Hepatitis E', 3: 'Alcoholic hepatitis', 36: 'Tuberculosis', 10: 'Common Cold', 34: 'Pneumonia', 13: 'Dimorphic hemmorhoids(piles)', 18: 'Heart attack', 39: 'Varicose veins', 26: 'Hypothyroidism', 24: 'Hyperthyroidism', 25: 'Hypoglycemia', 31: 'Osteoarthristis', 5: 'Arthritis', 0: '(vertigo) Paroymsal  Positional Vertigo', 2: 'Acne', 38: 'Urinary tract infection', 35: 'Psoriasis', 27: 'Impetigo'}
+# Load disease names in the same order as your model's output
+with open(model_path('diseases.pkl'), 'rb') as f:
+    diseases_list = pickle.load(f)
 
 # Model Prediction function
 def get_predicted_value(patient_symptoms):
     input_vector = np.zeros(len(symptoms_dict))
     for item in patient_symptoms:
-        input_vector[symptoms_dict[item]] = 1
-    return diseases_list[svc.predict([input_vector])[0]]
+        if item in symptoms_dict:
+            input_vector[symptoms_dict[item]] = 1
+    pred_idx = svc.predict([input_vector])[0]
+    return diseases_list[pred_idx]
+
 
 
 
@@ -99,41 +104,39 @@ def symptom_checker():
 def home():
     if request.method == 'POST':
         symptoms = request.form.get('symptoms')
-        print(symptoms)
-        if symptoms == "Symptoms":
-            message = "Please either write symptoms or you have written misspelled symptoms"
+        if not symptoms or symptoms.strip().lower() == "symptoms":
+            message = "Please enter your symptoms."
             return render_template('results.html', message=message)
-        else:
-            user_symptoms = [s.strip() for s in symptoms.split(',')]
-            user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
+        user_symptoms = [s.strip() for s in symptoms.split(',')]
+        user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
 
-            try:
-                predicted_disease = get_predicted_value(user_symptoms)
-            except KeyError:
-                # This can happen if symptom not in symptoms_dict, handle gracefully
-                message = "Symptoms not recognized. Please check your input."
-                return render_template('results.html', message=message)
+        try:
+            predicted_disease = get_predicted_value(user_symptoms)
+        except Exception:
+            message = "Symptoms not recognized. Please check your input."
+            return render_template('results.html', message=message)
 
-            # Check if predicted disease exists in your description dataset
-            if predicted_disease not in description['Disease'].values:
-                message = f"Disease '{predicted_disease}' not found in database."
-                return render_template('results.html', message=message)
+        # Check if predicted disease exists in your description dataset
+        if predicted_disease not in description['Disease'].values:
+            message = f"Disease '{predicted_disease}' not found in database."
+            return render_template('results.html', message=message)
 
-            dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
+        dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
 
-            my_precautions = []
-            if precautions and len(precautions) > 0:
-                my_precautions = [p for p in precautions[0] if p]
+        my_precautions = []
+        if precautions and len(precautions) > 0:
+            my_precautions = [p for p in precautions[0] if p]
 
-            return render_template('results.html',
-                                predicted_disease=predicted_disease,
-                                dis_des=dis_des,
-                                my_precautions=my_precautions,
-                                medications=medications,
-                                my_diet=rec_diet,
-                                workout=workout)
-# Or your form page for GET requests
-    return render_template('index.html')
+        return render_template(
+            'results.html',
+            predicted_disease=predicted_disease,
+            dis_des=dis_des,
+            my_precautions=my_precautions,
+            medications=medications,
+            my_diet=rec_diet,
+            workout=workout
+        )
+    return render_template('symptom_checker.html')
 
 
 @app.route('/find_doctors', methods=['GET'])

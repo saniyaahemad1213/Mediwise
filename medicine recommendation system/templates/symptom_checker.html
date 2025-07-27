@@ -151,9 +151,9 @@
     <h1 class="section-title">Symptom Checker</h1>
     <p class="section-subtitle">Describe your symptoms and get intelligent suggestions.</p>
 
-    <form id="symptom-form" class="bd-grid" style="max-width:600px;margin:auto;">
+    <form method="POST" action="/predict" id="symptom-form" class="bd-grid" style="max-width:600px;margin:auto;">
       <label for="symptoms">Enter your symptoms:</label>
-      <textarea id="symptoms" rows="5"></textarea>
+      <textarea id="symptoms" name="symptoms" rows="5"></textarea>
       <button type="submit">Check Symptoms</button>
     </form>
 
@@ -247,4 +247,6 @@
           return;
         }
         googleCombo.value = selectedLang;
-        googleCombo.dispatchEvent(new Event("change"));
+            googleCombo.dispatchEvent(new Event("change"));
+          });
+        });
