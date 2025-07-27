@@ -123,6 +123,21 @@ def home():
 
         dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
 
+        # Flatten medications if it's a list of lists
+        if medications and isinstance(medications[0], list):
+            medications = medications[0]
+        elif medications and isinstance(medications[0], str) and medications[0].startswith('[') and medications[0].endswith(']'):
+            # Handle string representation of list
+            import ast
+            medications = ast.literal_eval(medications[0])
+
+        # Flatten rec_diet if it's a list of lists
+        if rec_diet and isinstance(rec_diet[0], list):
+            rec_diet = rec_diet[0]
+        elif rec_diet and isinstance(rec_diet[0], str) and rec_diet[0].startswith('[') and rec_diet[0].endswith(']'):
+            import ast
+            rec_diet = ast.literal_eval(rec_diet[0])
+
         my_precautions = []
         if precautions and len(precautions) > 0:
             my_precautions = [p for p in precautions[0] if p]

@@ -171,8 +171,6 @@
   <ul>
     {% for m in medications %}
       <li>{{ m }}</li>
-    {% else %}
-      <li>No medications found.</li>
     {% endfor %}
   </ul>
 </div>
@@ -182,13 +180,12 @@
   <ul>
     {% for d in my_diet %}
       <li>{{ d }}</li>
-    {% else %}
-      <li>No diet found.</li>
     {% endfor %}
   </ul>
 </div>
 
       <div class="box">
+        
         <strong>Workout</strong>
         <ul>
           {% for w in workout %}
