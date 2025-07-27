@@ -135,6 +135,9 @@
       color: #777;
       margin-top: 3rem;
     }
+
+
+
   </style>
 </head>
 <body>
@@ -153,11 +156,11 @@
 
     <div class="result-boxes">
       <div class="box">
-        <strong>Description</strong>
+        <strong>📝 Description</strong>
         <p>{{ dis_des }}</p>
       </div>
       <div class="box">
-        <strong>Precautions</strong>
+        <strong>😷 Precautions</strong>
         <ul>
           {% for p in my_precautions %}
             <li>{{ p }}</li>
@@ -167,26 +170,29 @@
         </ul>
       </div>
       <div class="box">
-  <strong>Medications</strong>
+  <strong>💊 Medications</strong>
   <ul>
     {% for m in medications %}
       <li>{{ m }}</li>
+    {% else %}
+      <li>No medications found.</li>
     {% endfor %}
   </ul>
 </div>
 
 <div class="box">
-  <strong>Diet</strong>
+  <strong>🥗 Diet</strong>
   <ul>
     {% for d in my_diet %}
       <li>{{ d }}</li>
+    {% else %}
+      <li>No diet found.</li>
     {% endfor %}
   </ul>
 </div>
 
       <div class="box">
-        
-        <strong>Workout</strong>
+        <strong>🏋🏻‍♀ Workout</strong>
         <ul>
           {% for w in workout %}
             <li>{{ w }}</li>
