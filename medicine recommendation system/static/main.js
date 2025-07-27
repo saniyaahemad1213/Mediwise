@@ -246,3 +246,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+document.getElementById('symptom-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const symptoms = document.getElementById('symptoms').value.trim();
+  if (!symptoms) {
+    alert("Please enter symptoms first.");
+    return;
+  }
+  fetch('/predict', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ symptoms: symptoms })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+    document.getElementById('predicted-disease').textContent = data.predicted_disease;
+    document.getElementById('disease-description').textContent = data.description;
+    // Update lists
+    const setList = (id, items) => {
+      const ul = document.getElementById(id);
+      ul.innerHTML = "";
+      (items || []).forEach(i => {
+        const li = document.createElement("li");
+        li.textContent = i;
+        ul.appendChild(li);
+      });
+    };
+    setList("precautions-list", data.precautions);
+    setList("medications-list", data.medications);
+    setList("diet-list", data.diet);
+    setList("workout-list", data.workout);
+    document.getElementById('result').style.display = "block";
+    document.getElementById('result').scrollIntoView({ behavior: "smooth" });
+  })
+  .catch(() => {
+    alert("Error getting suggestions. Please try again.");
+  });
+});

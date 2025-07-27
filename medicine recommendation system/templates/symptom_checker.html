@@ -88,6 +88,212 @@
     .box ul {
       padding-left: 1.2rem;
     }
+    .symptom-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 0 2rem 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.symptom-hero .hero-lottie,
+.symptom-hero .hero-form {
+  flex: 1 1 0;
+  min-width: 320px;
+  max-width: 500px;
+}
+.hero-lottie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-form {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(6,156,84,0.08);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-form h1 {
+  font-size: 2.2rem;
+  color: #069C54;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 0.5rem;
+}
+.hero-form p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-family: 'Nunito', sans-serif;
+}
+#symptom-form {
+  width: 100%;
+}
+#symptom-form label {
+  font-size: 1.1rem;
+  font-family: 'Nunito', sans-serif;
+}
+#symptom-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-family: 'Nunito', sans-serif;
+}
+#symptom-form button {
+  background-color: #069C54;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+.result-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.result-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(6,156,84,0.10);
+  padding: 1.5rem 1.2rem;
+  min-width: 200px;
+  max-width: 240px;
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-title {
+  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin: 0.8rem 0 0.5rem 0;
+  color: #069C54;
+  letter-spacing: 1px;
+}
+.suggestion-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.suggestion-list li {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #333;
+  border-radius: 18px;
+  padding: 0.4em 1em;
+  margin: 0.2em 0.3em;
+  font-size: 1em;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+@media (max-width: 900px) {
+  .symptom-hero {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .symptom-hero .hero-lottie,
+  .symptom-hero .hero-form {
+    max-width: 100%;
+  }
+} 
+body {
+  background: #f7fafd;
+}
+
+.symptom-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 3.5rem auto 0 auto; /* Increased top margin */
+  padding-bottom: 2.5rem;
+}
+.hero-form {
+  flex: 1 1 500px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(6,156,84,0.10);
+  padding: 3rem 3rem 2.5rem 3rem;
+  min-width: 350px;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-form h1 {
+  font-size: 2.6rem;
+  color: #069C54;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.hero-form p {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 2rem;
+  font-family: 'Nunito', sans-serif;
+}
+#symptom-form label {
+  font-size: 1.15rem;
+  font-family: 'Nunito', sans-serif;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+#symptom-form textarea {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 10px;
+  border: 1.5px solid #b2dfdb;
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  font-family: 'Nunito', sans-serif;
+  background: #f8fafc;
+  resize: vertical;
+}
+#symptom-form button {
+  background-color: #069C54;
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.15rem;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(6,156,84,0.08);
+  transition: background 0.2s;
+}
+#symptom-form button:hover {
+  background: #047a3a;
+}
+@media (max-width: 900px) {
+  .symptom-hero {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .hero-form {
+    max-width: 100%;
+    padding: 2rem 1rem;
+  }
+}
   </style>
   
         <!--========== SCROLL TOP ==========-->
@@ -147,106 +353,99 @@
   <div id="google_translate_element" style="display:none;"></div>
 
   <!-- Main Content -->
-  <main class="bd-container section" id="checker">
-    <h1 class="section-title">Symptom Checker</h1>
-    <p class="section-subtitle">Describe your symptoms and get intelligent suggestions.</p>
+ <!-- Add this to your <head> for better fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 
-    <form method="POST" action="/predict" id="symptom-form" class="bd-grid" style="max-width:600px;margin:auto;">
-      <label for="symptoms">Enter your symptoms:</label>
-      <textarea id="symptoms" name="symptoms" rows="5"></textarea>
-      <button type="submit">Check Symptoms</button>
-    </form>
 
-    <div id="result" style="display:none; text-align:center;">
-      <h2 style="font-size: 2rem; color: #0072ff;">Prediction Results</h2>
-      <div class="disease-box">
-        <span id="predicted-disease">Flu</span>
+<main>
+  <div class="symptom-hero">
+    <!-- Left: Lottie Animation -->
+    <div class="hero-lottie">
+      <lottie-player src="../static/Medical Session.json" background="transparent" speed="1" style="width: 450px; height: 450px;" loop autoplay></lottie-player>
+    </div>
+    <!-- Right: Symptom Checker Form -->
+    <div class="hero-form">
+      <h1>Welcome To Mediwise</h1>
+      <p>Your AI Assisted Healthcare Partner</p>
+      <form id="symptom-form">
+        <label for="symptoms">Enter your symptoms:</label>
+        <textarea id="symptoms" name="symptoms" rows="4"></textarea>
+        <button type="submit">Check Symptoms</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div id="result" style="display:none;">
+    <div class="result-cards">
+      <div class="result-card">
+        <div class="card-title">Description</div>
+        <div id="disease-description"></div>
       </div>
-      <div class="result-boxes">
-        <div class="box">
-          <strong>Description</strong>
-          <p id="disease-description">A viral infection that attacks your respiratory system.</p>
-        </div>
-        <div class="box">
-          <strong>Precautions</strong>
-          <ul id="precautions-list"></ul>
-        </div>
-        <div class="box">
-          <strong>Medications</strong>
-          <ul id="medications-list"></ul>
-        </div>
-        <div class="box">
-          <strong>Diet</strong>
-          <ul id="diet-list"></ul>
-        </div>
-        <div class="box">
-          <strong>Workout</strong>
-          <ul id="workout-list"></ul>
-        </div>
+      <div class="result-card">
+        <div class="card-title">Precautions</div>
+        <ul id="precautions-list" class="suggestion-list"></ul>
+      </div>
+      <div class="result-card">
+        <div class="card-title">Medications</div>
+        <ul id="medications-list" class="suggestion-list"></ul>
+      </div>
+      <div class="result-card">
+        <div class="card-title">Diet</div>
+        <ul id="diet-list" class="suggestion-list"></ul>
+      </div>
+      <div class="result-card">
+        <div class="card-title">Workout</div>
+        <ul id="workout-list" class="suggestion-list"></ul>
       </div>
     </div>
-  </main>
+  </div>
+</main>
+<!-- JS (same as before) -->
+<script>
+document.getElementById('symptom-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const symptoms = document.getElementById('symptoms').value.trim();
+  const resultSection = document.getElementById('result');
 
-  <!-- Footer -->
-  <footer class="section">
-    <div class="bd-container" style="text-align:center;">
-      <p>&copy; 2025 Mediwise. All rights reserved.</p>
-    </div>
-  </footer>
+  if (!symptoms) {
+    alert("Please enter symptoms first.");
+    return;
+  }
 
-  <!-- JS -->
-  <script>
-    document.getElementById('symptom-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const symptoms = document.getElementById('symptoms').value.trim();
-      const resultSection = document.getElementById('result');
+  fetch('/predict', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ symptoms: symptoms })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+    document.getElementById('disease-description').textContent = data.description;
 
-      if (symptoms) {
-        // Replace this with your AJAX call to Flask if needed
-        const data = {
-          predicted_disease: "Common Cold",
-          description: "A viral infection affecting nose and throat.",
-          precautions: ["Drink plenty of fluids", "Rest", "Use humidifier", "Avoid cold foods"],
-          medications: ["Paracetamol", "Cough syrup", "Antihistamines"],
-          diet: ["Warm soups", "Ginger tea", "Vitamin C rich foods"],
-          workout: ["Light stretching", "Breathing exercises"]
-        };
+    const setList = (id, items) => {
+      const ul = document.getElementById(id);
+      ul.innerHTML = "";
+      (items || []).forEach(i => {
+        const li = document.createElement("li");
+        li.textContent = i;
+        ul.appendChild(li);
+      });
+    };
 
-        document.getElementById('predicted-disease').textContent = data.predicted_disease;
-        document.getElementById('disease-description').textContent = data.description;
+    setList("precautions-list", data.precautions);
+    setList("medications-list", data.medications);
+    setList("diet-list", data.diet);
+    setList("workout-list", data.workout);
 
-        const setList = (id, items) => {
-          const ul = document.getElementById(id);
-          ul.innerHTML = "";
-          items.forEach(i => {
-            const li = document.createElement("li");
-            li.textContent = i;
-            ul.appendChild(li);
-          });
-        };
-
-        setList("precautions-list", data.precautions);
-        setList("medications-list", data.medications);
-        setList("diet-list", data.diet);
-        setList("workout-list", data.workout);
-
-        resultSection.style.display = "block";
-        resultSection.scrollIntoView({ behavior: "smooth" });
-      } else {
-        alert("Please enter symptoms first.");
-      }
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const userSelect = document.getElementById("language-select");
-      userSelect.addEventListener("change", () => {
-        const selectedLang = userSelect.value;
-        const googleCombo = document.querySelector(".goog-te-combo");
-        if (!googleCombo) {
-          alert("Translator not loaded yet. Please wait a moment and try again.");
-          return;
-        }
-        googleCombo.value = selectedLang;
-            googleCombo.dispatchEvent(new Event("change"));
-          });
-        });
+    resultSection.style.display = "block";
+    resultSection.scrollIntoView({ behavior: "smooth" });
+  })
+  .catch(() => {
+    alert("Error getting suggestions. Please try again.");
+  });
+});
+</script>
