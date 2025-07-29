@@ -136,7 +136,26 @@
       margin-top: 3rem;
     }
 
+    form {
+      margin: 2rem 0;
+      display: inline-block;
+    }
 
+    form button {
+      background: #0072ff;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    form button:hover {
+      background: #0057b8;
+      transform: scale(1.05);
+    }
 
   </style>
 </head>
@@ -205,6 +224,11 @@
     </div>
     
     <a class="btn" href="{{ url_for('index') }}">Try Again</a>
+
+    <form action="{{ url_for('download_pdf') }}" method="post">
+      <input type="hidden" name="disease" value="{{ predicted_disease }}">
+      <button type="submit">Download PDF Report</button>
+    </form>
   </main>
 
   <footer>
