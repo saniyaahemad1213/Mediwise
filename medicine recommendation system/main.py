@@ -100,59 +100,41 @@ def index():
 def symptom_checker():
     return render_template('symptom_checker.html')
 # Define a route for the home page
-@app.route('/predict', methods=['GET', 'POST'])
-def home():
-    if request.method == 'POST':
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Try to get JSON data first
+    if request.is_json:
+        symptoms = request.json.get('symptoms')
+    else:
         symptoms = request.form.get('symptoms')
-        if not symptoms or symptoms.strip().lower() == "symptoms":
-            message = "Please enter your symptoms."
-            return render_template('results.html', message=message)
-        user_symptoms = [s.strip() for s in symptoms.split(',')]
-        user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
+    if not symptoms or symptoms.strip().lower() == "symptoms":
+        return jsonify({"error": "Please enter your symptoms."}), 400
 
-        try:
-            predicted_disease = get_predicted_value(user_symptoms)
-        except Exception:
-            message = "Symptoms not recognized. Please check your input."
-            return render_template('results.html', message=message)
+    user_symptoms = [s.strip() for s in symptoms.split(',')]
+    user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
 
-        # Check if predicted disease exists in your description dataset
-        if predicted_disease not in description['Disease'].values:
-            message = f"Disease '{predicted_disease}' not found in database."
-            return render_template('results.html', message=message)
+    try:
+        predicted_disease = get_predicted_value(user_symptoms)
+    except Exception:
+        return jsonify({"error": "Symptoms not recognized. Please check your input."}), 400
+
+    if predicted_disease not in description['Disease'].values:
+        return jsonify({"error": f"Disease '{predicted_disease}' not found in database."}), 404
 
         dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
-
-        # Flatten medications if it's a list of lists
-        if medications and isinstance(medications[0], list):
-            medications = medications[0]
-        elif medications and isinstance(medications[0], str) and medications[0].startswith('[') and medications[0].endswith(']'):
-            # Handle string representation of list
-            import ast
-            medications = ast.literal_eval(medications[0])
-
-        # Flatten rec_diet if it's a list of lists
-        if rec_diet and isinstance(rec_diet[0], list):
-            rec_diet = rec_diet[0]
-        elif rec_diet and isinstance(rec_diet[0], str) and rec_diet[0].startswith('[') and rec_diet[0].endswith(']'):
-            import ast
-            rec_diet = ast.literal_eval(rec_diet[0])
 
         my_precautions = []
         if precautions and len(precautions) > 0:
             my_precautions = [p for p in precautions[0] if p]
 
-        return render_template(
-            'results.html',
-            predicted_disease=predicted_disease,
-            dis_des=dis_des,
-            my_precautions=my_precautions,
-            medications=medications,
-            my_diet=rec_diet,
-            workout=workout
-        )
-    return render_template('symptom_checker.html')
-
+    return jsonify({
+        "predicted_disease": predicted_disease,
+        "description": dis_des,
+        "precautions": my_precautions,
+        "medications": medications,
+        "diet": rec_diet,
+        "workout": workout
+    })
 
 @app.route('/find_doctors', methods=['GET'])
 def find_doctors_page():
