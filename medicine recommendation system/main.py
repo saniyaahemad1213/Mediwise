@@ -9,6 +9,8 @@ import pickle
 import os
 import mysql.connector
 
+from fpdf import FPDF
+
 
 # flask app
 app = Flask(__name__)
@@ -121,11 +123,11 @@ def predict():
     if predicted_disease not in description['Disease'].values:
         return jsonify({"error": f"Disease '{predicted_disease}' not found in database."}), 404
 
-        dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
+    dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
 
-        my_precautions = []
-        if precautions and len(precautions) > 0:
-            my_precautions = [p for p in precautions[0] if p]
+    my_precautions = []
+    if precautions and len(precautions) > 0:
+        my_precautions = [p for p in precautions[0] if p]
 
     return jsonify({
         "predicted_disease": predicted_disease,
@@ -191,20 +193,9 @@ def find_doctors_api():
     })
     # ...inside your find_doctors_api route...
 
-@app.route('/get_disease/<name>')
-def get_disease(name):
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
 
-    cursor.execute("SELECT * FROM diseases WHERE name = %s", (name,))
-    disease = cursor.fetchone()
 
-    conn.close()
 
-    if disease:
-        return jsonify(disease)
-    else:
-        return jsonify({"error": "Not found"}), 404
 
 def get_recommendations(disease):
     # Use your existing helper or adapt as needed
