@@ -155,7 +155,7 @@ def predict():
     symptoms_list = [s.strip() for s in symptoms.split(',')] if symptoms else []
 
     return render_template(
-        'results.html',
+        'result.html',
         predicted_disease=predicted_disease,
         dis_des=dis_des,
         my_precautions=my_precautions,
