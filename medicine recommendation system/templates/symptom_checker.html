@@ -6,7 +6,7 @@
 
         <!--========== BOX ICONS ==========-->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-       <title>Find Doctors | Mediwise</title>
+      <title>Find Doctors | Mediwise</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../static/styles.css">
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../static/styles.css">
 
         <title>Mediwise - Your Health Partner</title>
-   
+
     <body>
   <style>
     body {
@@ -78,7 +78,7 @@
       background-color: white;
       padding: 1rem;
       border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(236, 231, 231, 0.1);
     }
     .box strong {
       display: block;
@@ -125,7 +125,7 @@
 }
 .hero-form p {
   font-size: 1.1rem;
-  color: #333;
+  color: #242323;
   margin-bottom: 1.5rem;
   font-family: 'Nunito', sans-serif;
 }
@@ -237,7 +237,7 @@ body {
   align-items: center;
 }
 .hero-form h1 {
-  font-size: 2.6rem;
+  font-size: 2rem;
   color: #069C54;
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 1rem;
@@ -253,6 +253,7 @@ body {
 #symptom-form label {
   font-size: 1.15rem;
   font-family: 'Nunito', sans-serif;
+  color: #111111;
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -260,7 +261,7 @@ body {
   width: 100%;
   padding: 1.2rem;
   border-radius: 10px;
-  border: 1.5px solid #b2dfdb;
+  border: 1.5px solid #61928e;
   font-size: 1.1rem;
   margin-bottom: 1.2rem;
   font-family: 'Nunito', sans-serif;
@@ -294,36 +295,6 @@ body {
     padding: 2rem 1rem;
   }
 }
-body.dark-theme {
-  background: #181b19 !important;
-  color: #f1f1f1 !important;
-}
-.dark-theme .hero-form,
-.dark-theme .box,
-.dark-theme .result-card,
-.dark-theme .disease-box,
-.dark-theme .section-title,
-.dark-theme .section-subtitle {
-  background: #232323 !important;
-  color: #f1f1f1 !important;
-  box-shadow: none;
-}
-.dark-theme .nav__menu,
-.dark-theme .l-header,
-.dark-theme header,
-.dark-theme nav {
-  background: #181b19 !important;
-  color: #f1f1f1 !important;
-}
-.dark-theme .card-title,
-.dark-theme .box strong {
-  color: #44c568 !important;
-}
-.dark-theme .suggestion-list li,
-.dark-theme .bubble-list li {
-  background: #222 !important;
-  color: #f1f1f1 !important;
-}
   </style>
   
         <!--========== SCROLL TOP ==========-->
@@ -347,7 +318,7 @@ body.dark-theme {
           <li class="nav__item"><a href="/#about" class="nav__link">About</a></li>
           <li class="nav__item"><a href="/find_doctors" class="nav__link">Find Doctors</a></li>
           <li class="nav__item"><a href="/#contact" class="nav__link">Contact</a></li>
-         <li class="nav__item">
+         <li class="nav__item>
   <!-- Hidden Google Translate Widget -->
 <script defer src="../static/main.js"></script>
 
@@ -397,8 +368,11 @@ body.dark-theme {
     <div class="hero-form">
       <h1>Welcome To Mediwise</h1>
       <p>Your AI Assisted Healthcare Partner</p>
+      <p style="color: #131414; font-size: 1rem; margin-bottom: 1.5rem;">
+  <strong>Example:</strong> (back_pain, neck_pain, dizziness......)
+</p>
       <form id="symptom-form" method="post" action="{{ url_for('predict') }}">
-  <label for="symptoms">Enter your symptoms:</label>
+  <label for="symptoms">Enter your symptoms: (Enter Atleast three Symptoms)</label>
   <textarea id="symptoms" name="symptoms" rows="4"></textarea>
   <button type="submit">Check Symptoms</button>
 </form>
