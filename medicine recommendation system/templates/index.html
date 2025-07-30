@@ -176,10 +176,19 @@
                     <a href="#" class="footer__logo">Mediwise</a>
                     <span class="footer__description">Healthcare</span>
                     <div>
-                        <a href="#" class="footer__social"><i class='bx bxl-facebook'></i></a>
-                        <a href="#" class="footer__social"><i class='bx bxl-instagram'></i></a>
-                        <a href="#" class="footer__social"><i class='bx bxl-twitter'></i></a>
-                    </div>
+  
+    <div>
+    <a href="mailto:forcode78@gmail.com" class="footer__social" target="_blank" rel="noopener">
+        <i class='bx bx-envelope'></i>
+    </a>
+    <a href="https://instagram.com/mediwise1" class="footer__social" target="_blank" rel="noopener">
+        <i class='bx bxl-instagram'></i>
+    </a>
+    <a href="https://twitter.com/@saniya9709" class="footer__social" target="_blank" rel="noopener">
+        <i class='bx bxl-twitter'></i>
+    </a>
+</div>
+</div>
                 </div>
                 <div class="footer__content">
                     <h3 class="footer__title">Services</h3>
@@ -249,23 +258,21 @@
   });
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const userSelect = document.getElementById("language-select");
-
-    userSelect.addEventListener("change", () => {
-      const selectedLang = userSelect.value;
-      const googleCombo = document.querySelector(".goog-te-combo");
-
-      if (!googleCombo) {
-        alert("Translator not loaded yet. Please wait a moment and try again.");
-        return;
-      }
-
-      googleCombo.value = selectedLang;
-      googleCombo.dispatchEvent(new Event("change"));
-    });
-  });
+  <div id="google_translate_element" style="display:none;"></div>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi,mr,ta,te,bn,gu,kn,ml,pa,or,ur,as,bh,mni,ne,sd,kok,ks,sa',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
 </script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+</script>
+
 
         <!--========== SCROLL REVEAL ==========-->
         <script src="https://unpkg.com/scrollreveal"></script>

@@ -44,6 +44,16 @@
       border-radius: 5px;
       border: 1px solid #ccc;
     }
+    /* Make sure header/nav stays above the map */
+.l-header, header, nav {
+  position: relative;
+  z-index: 100;
+}
+
+/* Make sure the map stays below the navbar */
+#mapid {
+  z-index: 1;
+}
   </style>
   <!-- Lottie Player -->
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>

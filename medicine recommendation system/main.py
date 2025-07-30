@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 import pickle
 import os
-import mysql.connector
 
 from fpdf import FPDF
 
