@@ -367,85 +367,13 @@ body {
     <div class="hero-form">
       <h1>Welcome To Mediwise</h1>
       <p>Your AI Assisted Healthcare Partner</p>
-      <form id="symptom-form">
-        <label for="symptoms">Enter your symptoms:</label>
-        <textarea id="symptoms" name="symptoms" rows="4"></textarea>
-        <button type="submit">Check Symptoms</button>
-      </form>
+      <form id="symptom-form" method="post" action="{{ url_for('predict') }}">
+  <label for="symptoms">Enter your symptoms:</label>
+  <textarea id="symptoms" name="symptoms" rows="4"></textarea>
+  <button type="submit">Check Symptoms</button>
+</form>
     </div>
   </div>
 
-  <!-- Results Section -->
-  <div id="result" style="display:none;">
-    <div class="result-cards">
-      <div class="result-card">
-        <div class="card-title">Description</div>
-        <div id="disease-description"></div>
-      </div>
-      <div class="result-card">
-        <div class="card-title">Precautions</div>
-        <ul id="precautions-list" class="suggestion-list"></ul>
-      </div>
-      <div class="result-card">
-        <div class="card-title">Medications</div>
-        <ul id="medications-list" class="suggestion-list"></ul>
-      </div>
-      <div class="result-card">
-        <div class="card-title">Diet</div>
-        <ul id="diet-list" class="suggestion-list"></ul>
-      </div>
-      <div class="result-card">
-        <div class="card-title">Workout</div>
-        <ul id="workout-list" class="suggestion-list"></ul>
-      </div>
-    </div>
-  </div>
-</main>
-<!-- JS (same as before) -->
-<script>
-document.getElementById('symptom-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const symptoms = document.getElementById('symptoms').value.trim();
-  const resultSection = document.getElementById('result');
 
-  if (!symptoms) {
-    alert("Please enter symptoms first.");
-    return;
-  }
-
-  fetch('/predict', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ symptoms: symptoms })
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
-    document.getElementById('disease-description').textContent = data.description;
-
-    const setList = (id, items) => {
-      const ul = document.getElementById(id);
-      ul.innerHTML = "";
-      (items || []).forEach(i => {
-        const li = document.createElement("li");
-        li.textContent = i;
-        ul.appendChild(li);
-      });
-    };
-
-    setList("precautions-list", data.precautions);
-    setList("medications-list", data.medications);
-    setList("diet-list", data.diet);
-    setList("workout-list", data.workout);
-
-    resultSection.style.display = "block";
-    resultSection.scrollIntoView({ behavior: "smooth" });
-  })
-  .catch(() => {
-    alert("Error getting suggestions. Please try again.");
-  });
-});
 </script>

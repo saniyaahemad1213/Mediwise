@@ -125,18 +125,45 @@ def predict():
 
     dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
 
+    import ast
+
+    def parse_list(val):
+        # Handles both ["['A', 'B']"] and "['A', 'B']"
+        if isinstance(val, list) and len(val) == 1 and isinstance(val[0], str) and val[0].startswith('['):
+            try:
+                return ast.literal_eval(val[0])
+            except Exception:
+                return val
+        if isinstance(val, str) and val.startswith('['):
+            try:
+                return ast.literal_eval(val)
+            except Exception:
+                return [val]
+        return val
+
+    # After: dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
+    medications = parse_list(medications)
+    Diet = parse_list(rec_diet)
+    my_precautions = parse_list(precautions)
+    workout = parse_list(workout)
+
     my_precautions = []
     if precautions and len(precautions) > 0:
         my_precautions = [p for p in precautions[0] if p]
 
-    return jsonify({
-        "predicted_disease": predicted_disease,
-        "description": dis_des,
-        "precautions": my_precautions,
-        "medications": medications,
-        "diet": rec_diet,
-        "workout": workout
-    })
+    symptoms = request.form.get('symptoms', '')
+    symptoms_list = [s.strip() for s in symptoms.split(',')] if symptoms else []
+
+    return render_template(
+        'results.html',
+        predicted_disease=predicted_disease,
+        dis_des=dis_des,
+        my_precautions=my_precautions,
+        medications=medications,
+        my_diet=Diet,
+        workout=workout,
+        symptoms=symptoms_list
+    )
 
 @app.route('/find_doctors', methods=['GET'])
 def find_doctors_page():
@@ -162,8 +189,8 @@ def find_doctors_api():
     overpass_query = f"""
     [out:json];
     (
-      node["amenity"="doctors"](around:{radius},{lat},{lon});
-      node["healthcare"="doctor"](around:{radius},{lat},{lon});
+    node["amenity"="doctors"](around:{radius},{lat},{lon});
+    node["healthcare"="doctor"](around:{radius},{lat},{lon});
     );
     out body;
     """
@@ -172,7 +199,7 @@ def find_doctors_api():
     doctors_found = []
 
     for element in osm_data.get('elements', []):
-     if element['type'] == 'node':
+      if element['type'] == 'node':
         tags = element.get('tags', {})
         name = tags.get('name', 'Doctor')
         address = tags.get('addr:street', 'Address not specified')
