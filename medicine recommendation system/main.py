@@ -198,20 +198,20 @@ def find_doctors_api():
     doctors_found = []
 
     for element in osm_data.get('elements', []):
-      if element['type'] == 'node':
-        tags = element.get('tags', {})
-        name = tags.get('name', 'Doctor')
-        address = tags.get('addr:street', 'Address not specified')
-        specialty = tags.get('speciality') or tags.get('specialty') or "General"
-        phone = tags.get('phone') or tags.get('contact:phone') or "Not available"
-        doctors_found.append({
-            "name": name,
-            "lat": element['lat'],
-            "lon": element['lon'],
-            "address": address,
-            "specialty": specialty,
-            "phone": phone
-        })
+        if element['type'] == 'node':
+            tags = element.get('tags', {})
+            name = tags.get('name', 'Doctor')
+            address = tags.get('addr:street', 'Address not specified')
+            specialty = tags.get('speciality') or tags.get('specialty') or "General"
+            phone = tags.get('phone') or tags.get('contact:phone') or "Not available"
+            doctors_found.append({
+                "name": name,
+                "lat": element['lat'],
+                "lon": element['lon'],
+                "address": address,
+                "specialty": specialty,
+                "phone": phone
+            })
             
     return jsonify({
         "center": {"lat": lat, "lon": lon},
