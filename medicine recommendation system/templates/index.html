@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,7 +13,7 @@
         <link rel="stylesheet" href="../static/styles.css">
 
         <title>Mediwise - Your Health Partner</title>
-   
+    </head>
     <body>
  
         <!--========== SCROLL TOP ==========-->
@@ -38,7 +37,7 @@
           <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
           <li class="nav__item"><a href="#services" class="nav__link">Services</a></li>
           <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-         <li class="nav__item">
+         <li class="nav__item>
   <!-- Hidden Google Translate Widget -->
 <script defer src="../static/main.js"></script>
 
@@ -258,28 +257,29 @@
   });
 </script>
 <script>
-  <div id="google_translate_element" style="display:none;"></div>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,hi,mr,ta,te,bn,gu,kn,ml,pa,or,ur,as,bh,mni,ne,sd,kok,ks,sa',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
+  async function translate() {
+    const text = document.getElementById("inputText").value;
+
+    const res = await fetch('/bhashini/translate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text: text,
+        source: 'hi',     // Hindi to English
+        target: 'en'
+      })
+    });
+
+    const data = await res.json();
+    document.getElementById("outputText").innerText = data.translated || data.output || JSON.stringify(data);
   }
 </script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-
-</script>
-
-
-        <!--========== SCROLL REVEAL ==========-->
-        <script src="https://unpkg.com/scrollreveal"></script>
-        <!--========== MAIN JS ==========-->
-
-        
-        <script src="../static/main.js"></script>
-        
-    </body>
+<section class="translator-section" style="max-width:600px; margin:2rem auto; background:#e6f9ed; border-radius:18px; padding:2rem; box-shadow:0 2px 8px rgba(6,156,84,0.08);">
+  <h2 style="color:#069C54; font-weight:700;">MediWise Translator</h2>
+  <textarea id="inputText" rows="4" cols="50" placeholder="Enter text in Hindi" style="width:100%; border-radius:8px; border:1px solid #b2f2d6; padding:1rem; margin-bottom:1rem;"></textarea><br>
+  <button onclick="translate()" style="background:#069C54; color:white; font-weight:600; border:none; border-radius:8px; padding:0.75rem 1.5rem; margin-bottom:1rem;">Translate</button>
+  <h3 style="color:#069C54;">Translated Output:</h3>
+  <div id="outputText" style="background:#fff; border-radius:8px; padding:1rem; min-height:2rem; border:1px solid #b2f2d6;"></div>
+</section>
+</body>
 </html>
