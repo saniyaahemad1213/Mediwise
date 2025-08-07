@@ -1,14 +1,16 @@
 from flask import Flask, request, render_template, jsonify, send_file
 import requests
-from urllib.parse import quote
+from dotenv import load_dotenv
+import os
 # Import jsonify
 import numpy as np
 
 import pandas as pd
 import pickle
-import os
 
-from fpdf import FPDF
+# Load .env file
+load_dotenv()
+UDYAT_KEY = os.getenv("BHASHINI_UDYAT_KEY")
 
 
 # flask app
@@ -317,6 +319,38 @@ def download_pdf():
 
     # Now send the file
     return send_file(abs_filepath, as_attachment=True)
+
+@app.route('/bhashini/translate', methods=['POST'])
+def bhashini_translate():
+    data = request.get_json()
+    text = data.get('text')
+    source_lang = data.get('source', 'hi')   # default: Hindi
+    target_lang = data.get('target', 'en')   # default: English
+
+    headers = {
+        "Authorization": f"Bearer {UDYAT_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "input": text,
+        "sourceLanguage": source_lang,
+        "targetLanguage": target_lang
+    }
+
+    try:
+        response = requests.post(
+            "https://inference-api.bhashini.gov.in/translate",
+            headers=headers,
+            json=payload
+        )
+        if response.status_code == 200:
+            result = response.json()
+            return jsonify(result)
+        else:
+            return jsonify({"error": response.text}), response.status_code
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
 
