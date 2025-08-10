@@ -4,6 +4,7 @@
 # Python cache
 _pycache_/
 *.py[cod]
+*.pyc
 
 # Virtual environments
 venv/
